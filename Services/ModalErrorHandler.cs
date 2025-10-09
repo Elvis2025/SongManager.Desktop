@@ -5,7 +5,7 @@ namespace SongManager.Desktop.Services
     /// </summary>
     public class ModalErrorHandler : IErrorHandler
     {
-        SemaphoreSlim _semaphore = new(1, 1);
+        readonly SemaphoreSlim _semaphore = new(1, 1);
 
         /// <summary>
         /// Handle error in UI.

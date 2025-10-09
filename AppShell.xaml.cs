@@ -1,5 +1,7 @@
 ﻿using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Core;
+using SongManager.Desktop.Repositories.SQLite;
+using System.Diagnostics;
 using Font = Microsoft.Maui.Font;
 
 namespace SongManager.Desktop
@@ -9,12 +11,30 @@ namespace SongManager.Desktop
         public AppShell()
         {
             InitializeComponent();
-            var currentTheme = Application.Current!.RequestedTheme;
-            ThemeSegmentedControl.SelectedIndex = currentTheme == AppTheme.Light ? 0 : 1;
+            InitilizeApp();
+        }
+
+        private void InitilizeApp()
+        {
+            try
+            {
+                var currentTheme = Application.Current!.RequestedTheme;
+                ThemeSegmentedControl.SelectedIndex = currentTheme == AppTheme.Light ? 0 : 1;
+                var managerSqlite = SongManagerApp.CreateInstance<ISQLiteManager>();
+                managerSqlite.CreateTablesUnAsync();
+              
+            }
+            catch (Exception e )
+            {
+                Debug.Write(e.Message);
+                MainThread.BeginInvokeOnMainThread(async () => { 
+                    await DisplayAlert("Error", e.Message, "OK");
+                });
+            }
         }
         public static async Task DisplaySnackbarAsync(string message)
         {
-            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+            CancellationTokenSource cancellationTokenSource = new();
 
             var snackbarOptions = new SnackbarOptions
             {
