@@ -61,6 +61,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiFont Remove="C:\Users\ehernandez\.nuget\packages\syncfusion.maui.toolkit\1.0.5\buildTransitive\..\buildTransitive\Resources\Fonts\MauiMaterialAssets.ttf" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <None Remove=".gitattributes" />
 	  <None Remove=".gitignore" />
 	</ItemGroup>
@@ -107,13 +111,11 @@
 	  <MauiXaml Update="Pages\HomePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\UserPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
+
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Pages\User\" />
+	  <Folder Include="Resources\Fonts\" />
 	</ItemGroup>
 	
 </Project>

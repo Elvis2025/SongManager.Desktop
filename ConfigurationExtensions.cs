@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
+using SongManager.Desktop.UsesCases.IconFont;
 using Syncfusion.Maui.Toolkit.Hosting;
 
 namespace SongManager.Desktop;
@@ -17,6 +18,7 @@ public static class ConfigurationExtensions
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 fonts.AddFont("fa-solid-900.ttf", "FaSolid");
+                fonts.AddFont("FluentSystemIcons-Regular.ttf", FluentUI.FontFamily);
                 fonts.AddFont("TypeIconsColor.ttf", "TypeIconsColor");
                 fonts.AddFont("MaterialIcons-Regular.ttf", "IconRegular");
                 fonts.AddFont("MaterialIconsOutlined-Regular.otf", "IconOutlined");

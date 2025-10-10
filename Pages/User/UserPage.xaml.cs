@@ -1,6 +1,6 @@
 using SongManager.Desktop.Attributes;
 
-namespace SongManager.Desktop.Pages;
+namespace SongManager.Desktop.Pages.User;
 [RegisterAsRoute]
 public partial class UserPage : BaseContentPage<UserPageModel>
 {
