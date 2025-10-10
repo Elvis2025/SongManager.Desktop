@@ -1,4 +1,5 @@
 ﻿using Microsoft.UI.Xaml;
+using SongManager.Desktop.UsesCases.Exceptions;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -17,6 +18,12 @@ namespace SongManager.Desktop.WinUI
         public App()
         {
             this.InitializeComponent();
+            Microsoft.UI.Xaml.Application.Current.UnhandledException += (s, e) =>
+            {
+                CrashLog.Write(e.Exception, "WinUI.UnhandledException");
+                System.Diagnostics.Debug.WriteLine("UNHANDLED (WinUI): " + e.Exception);
+                e.Handled = true; 
+            };
         }
 
         protected override MauiApp CreateMauiApp() => MauiProgram.CreateMauiApp();

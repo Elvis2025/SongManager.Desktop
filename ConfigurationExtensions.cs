@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
+using SongManager.Desktop.UsesCases.Exceptions;
 using SongManager.Desktop.UsesCases.IconFont;
 using Syncfusion.Maui.Toolkit.Hosting;
 
@@ -34,6 +35,18 @@ public static class ConfigurationExtensions
 #if DEBUG
         builder.Logging.AddDebug();
 #endif
+        AppDomain.CurrentDomain.UnhandledException += (s, e) =>
+        {
+            CrashLog.Write(e.ExceptionObject as Exception, "AppDomain.UnhandledException");
+            System.Diagnostics.Debug.WriteLine("UNHANDLED (AppDomain): " + e.ExceptionObject);
+        };
+
+        TaskScheduler.UnobservedTaskException += (s, e) =>
+        {
+            CrashLog.Write(e.Exception, "TaskScheduler.UnobservedTaskException");
+            System.Diagnostics.Debug.WriteLine("UNOBSERVED (Task): " + e.Exception);
+            e.SetObserved();
+        };
         return builder.Build();
     }
 }
