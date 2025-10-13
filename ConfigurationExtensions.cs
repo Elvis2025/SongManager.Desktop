@@ -31,16 +31,9 @@ public static class ConfigurationExtensions
 
         builder.Services.AddServices();
         builder.Services.AddSingleton(FileSystem.Current);
-        //builder.Services.AddHttpClient();
 #if DEBUG
         builder.Logging.AddDebug();
 #endif
-        AppDomain.CurrentDomain.UnhandledException += (s, e) =>
-        {
-            CrashLog.Write(e.ExceptionObject as Exception, "AppDomain.UnhandledException");
-            System.Diagnostics.Debug.WriteLine("UNHANDLED (AppDomain): " + e.ExceptionObject);
-        };
-
         TaskScheduler.UnobservedTaskException += (s, e) =>
         {
             CrashLog.Write(e.Exception, "TaskScheduler.UnobservedTaskException");

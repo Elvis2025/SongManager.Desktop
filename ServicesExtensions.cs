@@ -1,5 +1,6 @@
 ﻿using SongManager.Desktop.Attributes;
 using SongManager.Desktop.AutoMapper;
+using SongManager.Desktop.Constants;
 using SongManager.Desktop.Repositories.SQLite;
 using System.Diagnostics;
 using System.Reflection;
@@ -45,17 +46,15 @@ public static class ServicesExtensions
                                      .Select(a => a.GetType());
 
                     return attrTypes.Any(at =>
-                        at.Namespace == "ITHSystems.Attributes" &&
+                        at.Namespace == GlobalVariables.Attributes &&
                         at != typeof(SQLiteEntityAttribute));
                 })
-
                 .ToList();
 
             foreach (var implType in toRegister)
             {
                 var interfaceType = implType.GetInterfaces()
                     .FirstOrDefault(i => i.Name == $"I{implType.Name}");
-
                 if (interfaceType is null)
                     services.AddTransient(implType);
                 else
