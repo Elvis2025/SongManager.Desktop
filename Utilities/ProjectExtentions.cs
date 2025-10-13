@@ -13,9 +13,6 @@ namespace SongManager.Desktop.Utilities
         /// </summary>
         /// <param name="project"></param>
         /// <returns></returns>
-        public static bool IsNullOrNew([NotNullWhen(false)] this Project? project)
-        {
-            return project is null || project.ID == 0;
-        }
+        
     }
 }

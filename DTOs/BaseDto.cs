@@ -1,8 +1,9 @@
-﻿using SQLite;
+﻿using SongManager.Desktop.Models;
+using SQLite;
 
 namespace SongManager.Desktop.DTOs;
 
-public abstract record class BaseDto<TPrimaryKey>
+public abstract record class BaseDto<TPrimaryKey> : IBaseEntity
 {
     public virtual TPrimaryKey Id { get; set; } = default!;
     public DateTime CreationTime { get; set; }

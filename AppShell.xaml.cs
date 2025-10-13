@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Core;
 using SongManager.Desktop.Repositories.SQLite;
+using SongManager.Desktop.UsesCases;
 using System.Diagnostics;
 using Font = Microsoft.Maui.Font;
 
@@ -22,7 +23,7 @@ namespace SongManager.Desktop
                 ThemeSegmentedControl.SelectedIndex = currentTheme == AppTheme.Light ? 0 : 1;
                 var managerSqlite = SongManagerApp.CreateInstance<ISQLiteManager>();
                 managerSqlite.CreateTablesUnAsync();
-              
+                TestData.InsertTestDataAsync();
             }
             catch (Exception e )
             {

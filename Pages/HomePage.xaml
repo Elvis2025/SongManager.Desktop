@@ -9,10 +9,72 @@
                        xmlns:controls="clr-namespace:SongManager.Desktop.Pages"
                        xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
                        x:TypeArguments="pageModel:HomePageModel">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+    <VerticalStackLayout Padding="10,0,10,10">
+        <Label Text="Listado de Canciones"
+               FontAttributes="Bold"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               Margin="0,0,0,20"
+               />
+        
+        <Button Text="Insert Data"
+                VerticalOptions="Center"
+                HorizontalOptions="Start"
+                Margin="0,0,0,20"
+                Command="{Binding InsertSongsListAsyncCommand}"
+                Clicked="Button_Clicked"
+                />
+        <Grid ColumnDefinitions="2*,2*,2*,2*,2*,1*"
+              Padding="5"
+              BackgroundColor="{AppThemeBinding Dark={StaticResource Gray100}, Light={StaticResource Gray300}}">
+            <Label Text="Nombre" 
+                   FontAttributes="Bold" 
+                   TextColor="{AppThemeBinding Dark={StaticResource Gray600}, Light={StaticResource Gray900}}"/>
+            <Label Text="Autor" 
+                   Grid.Column="1" 
+                   FontAttributes="Bold"
+                   TextColor="{AppThemeBinding Dark={StaticResource Gray600}, Light={StaticResource Gray900}}"
+                   />
+            <Label Text="Cantante" 
+                   Grid.Column="2" 
+                   FontAttributes="Bold"
+                   TextColor="{AppThemeBinding Dark={StaticResource Gray600}, Light={StaticResource Gray900}}"
+                   />
+            
+            <Label Text="Tonalidad" 
+                   Grid.Column="3" 
+                   FontAttributes="Bold"
+                   TextColor="{AppThemeBinding Dark={StaticResource Gray600}, Light={StaticResource Gray900}}"
+                   />
+            
+            <Label Text="Link" 
+                   Grid.Column="4" 
+                   FontAttributes="Bold"
+                   TextColor="{AppThemeBinding Dark={StaticResource Gray600}, Light={StaticResource Gray900}}"
+                   />
+            
+            <Label Text="Fecha" 
+                   Grid.Column="5" 
+                   FontAttributes="Bold"
+                   TextColor="{AppThemeBinding Dark={StaticResource Gray600}, Light={StaticResource Gray900}}"
+                   />
+            
+        </Grid>
+
+        <!-- Filas dinámicas -->
+        <CollectionView ItemsSource="{Binding SongsList}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid ColumnDefinitions="2*,2*,2*,2*,2*,1*" Padding="5" BackgroundColor="White">
+                        <Label Text="{Binding SongName}" />
+                        <Label Text="{Binding SongAuthor}" Grid.Column="1"/>
+                        <Label Text="{Binding Singer}" Grid.Column="2"/>
+                        <Label Text="{Binding KeySignatureValue}" Grid.Column="3"/>
+                        <Label Text="{Binding Link}" Grid.Column="4"/>
+                        <Label Text="{Binding CreationTime}" Grid.Column="5"/>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
     </VerticalStackLayout>
 </pages:BaseContentPage>

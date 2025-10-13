@@ -8,7 +8,6 @@
     Shell.FlyoutBehavior="Flyout">
 
     <ShellContent
-        Title="Listado de canciones"
         Icon="{StaticResource IconDashboard}"
         ContentTemplate="{DataTemplate pages:HomePage}"
         Route="HomePage" />

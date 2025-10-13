@@ -1,4 +1,6 @@
 ﻿using SongManager.Desktop.Attributes;
+using SongManager.Desktop.DTOs;
+using SongManager.Desktop.Extensions;
 using SQLite;
 
 namespace SongManager.Desktop.Models;
@@ -14,4 +16,6 @@ public class User : BaseEntity<int>
     public string FirstSurname { get; set; } = string.Empty;
     public string SecondSurname { get; set; } = string.Empty;
     public string Password { get; set; } = string.Empty;
+    [Ignore]
+    public UserDto UserDto => this.Map<UserDto>();
 }
