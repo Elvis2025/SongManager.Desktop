@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<pages:BaseContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       x:Class="SongManager.Desktop.Pages.Songs.SongsPage"
+                       xmlns:pages="clr-namespace:SongManager.Desktop.Pages"
+                       xmlns:pageModel="clr-namespace:SongManager.Desktop.PageModels"
+                       xmlns:resources="clr-namespace:SongManager.Desktop.Resx"
+                       xmlns:icon="clr-namespace:SongManager.Desktop.UsesCases.IconFont"
+                       xmlns:controls="clr-namespace:SongManager.Desktop.Pages"
+                       xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+                       x:TypeArguments="pageModel:SongsPageModel"
+                       Title=""
+                       >
+    <VerticalStackLayout Padding="10,0,10,10">
+        <Label Text="Listado de canciones"
+           FontAttributes="Bold"
+           FontSize="36"
+           HorizontalOptions="Center"
+           VerticalOptions="Center"
+           Margin="0,0,0,20"
+           TextColor="{AppThemeBinding Dark={StaticResource LightBackground},Light={StaticResource Gray600}}"
+           />
+
+
+
+
+        <Border Padding="0">
+            <Grid RowDefinitions="Auto,*"
+              >
+
+                <Grid ColumnDefinitions="2*,3*,3*,1.2*"
+              Padding="5"
+              ColumnSpacing="50"
+              Grid.Row="0"
+              BackgroundColor="{AppThemeBinding Dark={StaticResource Gray600}, Light={StaticResource Gray300}}">
+                    <Label Text="Cantante" 
+                           Grid.Column="0" 
+                           Margin="18,0,0,0"
+                           FontAttributes="Bold"
+                           TextColor="{AppThemeBinding Dark={StaticResource LightBackground}, Light={StaticResource Gray600}}"
+                           />
+                    <Label Text="Nombre de la canción" 
+                   FontAttributes="Bold" 
+                   Grid.Column="1" 
+                   TextColor="{AppThemeBinding Dark={StaticResource LightBackground}, Light={StaticResource Gray600}}"/>
+                    <Label Text="Autor" 
+                   Grid.Column="2" 
+                   FontAttributes="Bold"
+                   TextColor="{AppThemeBinding Dark={StaticResource LightBackground}, Light={StaticResource Gray600}}"
+                   />
+
+                    <Label Text="Tono"
+                   Grid.Column="3" 
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   TextColor="{AppThemeBinding Dark={StaticResource LightBackground}, Light={StaticResource Gray600}}"
+                   />
+                </Grid>
+
+
+                <CollectionView ItemsSource="{Binding SongsList}"
+                            Grid.Row="1">
+                    <CollectionView.Header>
+                        <DataTemplate>
+
+                        </DataTemplate>
+                    </CollectionView.Header>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid ColumnDefinitions="2*,3*,3*,1.2*" 
+                            Padding="8" 
+                            BackgroundColor="White"
+                          
+                            ColumnSpacing="50"
+                            >
+                                <Label Text="{Binding Singer}" 
+                                Grid.Column="0"
+                                FontAttributes="Bold"
+                               Margin="18,0,0,0"
+                                TextColor="{AppThemeBinding Dark={StaticResource Gray400}, Light={StaticResource Gray400}}"
+                                />
+
+                                <Label Text="{Binding SongName}" 
+                                TextColor="{AppThemeBinding Dark={StaticResource Gray400}, Light={StaticResource Gray400}}"
+                                FontAttributes="Bold"
+                                Grid.Column="1"
+                                />
+
+
+                                <Label Text="{Binding SongAuthor}" 
+                                Grid.Column="2"
+                                TextColor="{AppThemeBinding Dark={StaticResource Gray400}, Light={StaticResource Gray400}}"
+                                FontAttributes="Bold"
+                           
+                                />
+
+                                <Label Text="{Binding KeySignatureValue}" 
+                                Grid.Column="3"
+                                FontAttributes="Bold"
+                                TextColor="{AppThemeBinding Dark={StaticResource Gray400}, Light={StaticResource Gray400}}"
+                                HorizontalOptions="Center"
+                                />
+
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
+        </Border>
+
+        <Button Text="Insert Data"
+            VerticalOptions="End"
+            HorizontalOptions="End"
+            Margin="0,20,0,0"
+            Command="{Binding InsertSongsListCommand}"
+            />
+    </VerticalStackLayout>
+</pages:BaseContentPage>

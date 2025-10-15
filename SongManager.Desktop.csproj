@@ -87,6 +87,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Pages\Songs\SongsPage.xaml.cs">
+	    <DependentUpon>SongsPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Singers\SingersPage.xaml.cs">
+	    <DependentUpon>SingersPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Resx\SongManagerResources.Designer.cs">
 	    <DesignTime>True</DesignTime>
 	    <AutoGen>True</AutoGen>
@@ -105,7 +111,16 @@
 	  <MauiXaml Update="Controls\SongManagerFeaturePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\AddSongs.xaml">
+	  <MauiXaml Update="Pages\Singers\CreateSingersPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Singers\SingersPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Songs\CreateSongsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Songs\SongsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\HomePage.xaml">

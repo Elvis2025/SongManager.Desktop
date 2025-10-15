@@ -6,7 +6,7 @@ using SQLite;
 
 namespace SongManager.Desktop.Models;
 [SQLiteEntity]
-public class SongsList : BaseEntity<long>
+public class SongsLists : BaseEntity<long>
 {
     [Indexed(Name = "idx_songname_songauthor_singer_key", Order = 1, Unique = true)]
     public string SongName { get; set; } = string.Empty;
@@ -19,5 +19,5 @@ public class SongsList : BaseEntity<long>
 
     public string Link { get; set; } = string.Empty;
     [Ignore]    
-    public SongsListDto SongsListDto => this.Map<SongsListDto>();
+    public SongsListsDto SongsListDto => this.Map<SongsListsDto>();
 }

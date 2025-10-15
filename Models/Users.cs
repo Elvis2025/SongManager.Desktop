@@ -5,7 +5,7 @@ using SQLite;
 
 namespace SongManager.Desktop.Models;
 [SQLiteEntity]
-public class User : BaseEntity<int>
+public class Users : BaseEntity<int>
 {
     [Unique]
     public string Username { get; set; } = string.Empty;
@@ -17,5 +17,5 @@ public class User : BaseEntity<int>
     public string SecondSurname { get; set; } = string.Empty;
     public string Password { get; set; } = string.Empty;
     [Ignore]
-    public UserDto UserDto => this.Map<UserDto>();
+    public UsersDto UserDto => this.Map<UsersDto>();
 }

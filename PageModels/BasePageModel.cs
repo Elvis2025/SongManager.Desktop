@@ -1,6 +1,5 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using SongManager.Desktop.Resx;
-using System.Diagnostics;
+﻿using SongManager.Desktop.Constants;
+using SongManager.Desktop.Enum;
 
 namespace SongManager.Desktop.PageModels;
 
@@ -8,7 +7,17 @@ public abstract partial class BasePageModel : ObservableObject
 {
     [ObservableProperty]
     private bool isBusy;
-
+    [ObservableProperty]
+    private SingersDto? currentSingerDto = new();
+    [ObservableProperty]
+    private ObservableCollection<VocalRangeDto>? vocalRangesDto = new(GlobalVariables.VocalRanges);
+    [ObservableProperty]
+    private ObservableCollection<GenderDto>? genres = new(GlobalVariables.Genres);
+    [ObservableProperty]
+    private VocalRangeDto? currentVocalRangesDto = new();
+    [ObservableProperty]
+    private GenderDto? currentGender = new();
+  
     public static async Task SuccessAlert(string title, string message)
     {
         await Shell.Current.DisplayAlert(title, message, SongManagerResources.Ok);
@@ -35,6 +44,73 @@ public abstract partial class BasePageModel : ObservableObject
             await Shell.Current.DisplayAlert("Song Manager Error", e.Message, SongManagerResources.Ok);
         }
     }
+
+    public static async Task PushAsync<T>() where T : ContentPage
+    {
+        try
+        {
+            await Shell.Current.Navigation.PushAsync(SongManagerApp.CreateInstance<T>());
+        }
+        catch (Exception e)
+        {
+            Debug.WriteLine(e.Message);
+            await Shell.Current.DisplayAlert("Song Manager Error", e.Message, SongManagerResources.Ok);
+        }
+    }
+    public static async Task PushModalAsync<T>() where T : ContentPage
+    {
+        try
+        {
+            await Shell.Current.Navigation.PushModalAsync(SongManagerApp.CreateInstance<T>());
+        }
+        catch (Exception e)
+        {
+            Debug.WriteLine(e.Message);
+            await Shell.Current.DisplayAlert("Song Manager Error", e.Message, SongManagerResources.Ok);
+        }
+    }
+    public static async Task PopModalAsync()
+    {
+        try
+        {
+            await Shell.Current.Navigation.PopModalAsync();
+        }
+        catch (Exception e)
+        {
+            Debug.WriteLine(e.Message);
+            await Shell.Current.DisplayAlert("Song Manager Error", e.Message, SongManagerResources.Ok);
+        }
+    }
+
+    [RelayCommand]
+    public static async Task PopModal()
+    {
+        try
+        {
+            await PopModalAsync();
+        }
+        catch (Exception e)
+        {
+            Debug.WriteLine(e.Message);
+            await Shell.Current.DisplayAlert("Song Manager Error", e.Message, SongManagerResources.Ok);
+        }
+    }
+
+
+    public static async Task PushAsync<T>(T Page) where T : ContentPage
+    {
+        try
+        {
+            await Shell.Current.Navigation.PushAsync(Activator.CreateInstance<T>());
+        }
+        catch (Exception e)
+        {
+            Debug.WriteLine(e.Message);
+            await Shell.Current.DisplayAlert("Song Manager Error", e.Message, SongManagerResources.Ok);
+        }
+    }
+
+
     public static async Task PushRelativePageAsync<T>(Dictionary<string, object> param) where T : ContentPage
     {
         try

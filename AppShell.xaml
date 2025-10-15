@@ -4,14 +4,28 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:sf="clr-namespace:Syncfusion.Maui.Toolkit.SegmentedControl;assembly=Syncfusion.Maui.Toolkit"
-    xmlns:pages="clr-namespace:SongManager.Desktop.Pages"
+    xmlns:songs="clr-namespace:SongManager.Desktop.Pages.Songs"
+    xmlns:singers="clr-namespace:SongManager.Desktop.Pages.Singers"
+    xmlns:users="clr-namespace:SongManager.Desktop.Pages.Users"
     Shell.FlyoutBehavior="Flyout">
 
     <ShellContent
+        Title="Canciones"
         Icon="{StaticResource IconDashboard}"
-        ContentTemplate="{DataTemplate pages:HomePage}"
-        Route="HomePage" />
+        ContentTemplate="{DataTemplate songs:SongsPage}"
+        Route="SongsPage" />
+    <ShellContent
+         Title="Cantantes"
+         Icon="{StaticResource IconDashboard}"
+         ContentTemplate="{DataTemplate singers:SingersPage}"
+         Route="SingersPage" />
     
+    <ShellContent
+         Title="Usuarios"
+         Icon="{StaticResource IconDashboard}"
+         ContentTemplate="{DataTemplate users:UserPage}"
+         Route="UserPage" />
+
     <Shell.FlyoutFooter>
         <Grid Padding="15">
             <sf:SfSegmentedControl x:Name="ThemeSegmentedControl" 

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<pages:BaseContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       x:Class="SongManager.Desktop.Pages.Singers.SingersPage"
+                       xmlns:pages="clr-namespace:SongManager.Desktop.Pages"
+                       xmlns:pageModel="clr-namespace:SongManager.Desktop.PageModels"
+                       xmlns:resources="clr-namespace:SongManager.Desktop.Resx"
+                       xmlns:icon="clr-namespace:SongManager.Desktop.UsesCases.IconFont"
+                       xmlns:controls="clr-namespace:SongManager.Desktop.Pages"
+                       xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+                       x:TypeArguments="pageModel:SingersPageModel"
+                       Title=""
+                       >
+    <Grid Padding="10,0,10,10"
+          RowDefinitions="Auto,*,Auto"
+          >
+        <Label Text="Cantantes"
+            FontAttributes="Bold"
+            FontSize="36"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            Margin="0,0,0,20"
+               Grid.Row="0"
+            TextColor="{AppThemeBinding Dark={StaticResource LightBackground},Light={StaticResource Gray600}}"
+            />
+        <Border Padding="0"
+                Grid.Row="1"
+                Margin="120,0,120,0">
+            <Grid RowDefinitions="Auto,*"
+                  BackgroundColor="White"
+               >
+
+                <Grid ColumnDefinitions="2*,2*,1.2*"
+               Padding="5"
+               
+               ColumnSpacing="50"
+               Grid.Row="0"
+               BackgroundColor="{AppThemeBinding Dark={StaticResource Gray600}, Light={StaticResource Gray300}}">
+                    <Label Text="Codigo" 
+                           Grid.Column="0" 
+                           Margin="18,0,0,0"
+                           FontAttributes="Bold"
+                           TextColor="{AppThemeBinding Dark={StaticResource LightBackground}, Light={StaticResource Gray600}}"
+                           />
+                    <Label Text="Nombre" 
+                           FontAttributes="Bold" 
+                           Grid.Column="1" 
+                           TextColor="{AppThemeBinding Dark={StaticResource LightBackground}, Light={StaticResource Gray600}}"/>
+
+                    <Label Text="Rango Vocal"
+                           Grid.Column="3" 
+                           FontAttributes="Bold"
+                           HorizontalOptions="Center"
+                           TextColor="{AppThemeBinding Dark={StaticResource LightBackground}, Light={StaticResource Gray600}}"
+                           />
+                </Grid>
+
+                <ScrollView Grid.Row="1">
+                    <CollectionView ItemsSource="{Binding SingersDto}"
+                                Grid.Row="1"
+                                BackgroundColor="White"
+                                    VerticalOptions="Start"
+                                    SelectionMode="Single"
+                                    SelectedItem="{Binding CurrentSingerDto}"
+                                    SelectionChangedCommand="{Binding EditSingerCommand}"
+                                >
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid ColumnDefinitions="2*,2*,1.2*" 
+                                 Padding="8" 
+                                 ColumnSpacing="50"
+                                 >
+                                <Label Text="{Binding Code}" 
+                                 Grid.Column="0"
+                                 FontAttributes="Bold"
+                                Margin="18,0,0,0"
+                                 TextColor="{AppThemeBinding Dark={StaticResource Gray400}, Light={StaticResource Gray400}}"
+                                 />
+
+                                <Label Text="{Binding FirstName}" 
+                                 TextColor="{AppThemeBinding Dark={StaticResource Gray400}, Light={StaticResource Gray400}}"
+                                 FontAttributes="Bold"
+                                 Grid.Column="1"
+                                 />
+                                
+                                <Label Text="{Binding VocalRange}" 
+                                     Grid.Column="3"
+                                     FontAttributes="Bold"
+                                     TextColor="{AppThemeBinding Dark={StaticResource Gray400}, Light={StaticResource Gray400}}"
+                                     HorizontalOptions="Center"
+                                     />
+
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                </ScrollView>
+            </Grid>
+        </Border>
+
+        <Border HorizontalOptions="End"
+                VerticalOptions="End"
+                StrokeShape="RoundRectangle 100"
+                Padding="9.5,9.5,6,6"
+                Margin="0,30,30,0"
+                Grid.Row="2"
+                >
+
+            <Label Text="{Static icon:FluentUI.add_12_regular}"
+                    FontFamily="{Static icon:FluentUI.FontFamily}"
+                    VerticalOptions="Center"
+                   FontAttributes="Bold"
+                   FontSize="38"
+                   HorizontalTextAlignment="Center"
+                   VerticalTextAlignment="Center"
+                    Margin="0,0,0,0"
+                   Padding="0"
+                   HorizontalOptions="Center"/>
+            <Border.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding  CreateSingerCommand}"/>
+            </Border.GestureRecognizers>
+        </Border>
+       
+        </Grid>
+</pages:BaseContentPage>

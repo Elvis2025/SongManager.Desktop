@@ -1,10 +1,6 @@
-﻿using AutoMapper;
-using SongManager.Desktop.Extensions;
-using SongManager.Desktop.Models;
-
-namespace SongManager.Desktop.DTOs;
-[AutoMap(typeof(User))]
-public record class UserDto : BaseDto<int>
+﻿namespace SongManager.Desktop.DTOs;
+[AutoMap(typeof(Users))]
+public record class UsersDto : BaseDto<int>
 {
     public string Username { get; set; } = string.Empty;
     public string Email { get; set; } = string.Empty;
@@ -15,5 +11,5 @@ public record class UserDto : BaseDto<int>
     public string Password { get; set; } = string.Empty;
     public string FullName => $"{FirstName} {FirstSurname}";
     public bool IsAdmin { get; set; }
-    public User User => this.Map<User>();
+    public Users User => this.Map<Users>();
 }
