@@ -25,17 +25,15 @@
             />
         <Border Padding="0"
                 Grid.Row="1"
-                Margin="120,0,120,0">
+                Margin="160,0,160,0">
             <Grid RowDefinitions="Auto,*"
-                  BackgroundColor="White"
-               >
+                  BackgroundColor="White">
 
-                <Grid ColumnDefinitions="2*,2*,1.2*"
-               Padding="5"
-               
-               ColumnSpacing="50"
-               Grid.Row="0"
-               BackgroundColor="{AppThemeBinding Dark={StaticResource Gray600}, Light={StaticResource Gray300}}">
+                <Grid ColumnDefinitions="0.4*,0.7*,1*"
+                       Padding="5"
+                       ColumnSpacing="20"
+                       Grid.Row="0"
+                       BackgroundColor="{AppThemeBinding Dark={StaticResource Gray600}, Light={StaticResource Gray300}}">
                     <Label Text="Codigo" 
                            Grid.Column="0" 
                            Margin="18,0,0,0"
@@ -48,11 +46,17 @@
                            TextColor="{AppThemeBinding Dark={StaticResource LightBackground}, Light={StaticResource Gray600}}"/>
 
                     <Label Text="Rango Vocal"
-                           Grid.Column="3" 
+                           Grid.Column="2" 
                            FontAttributes="Bold"
-                           HorizontalOptions="Center"
                            TextColor="{AppThemeBinding Dark={StaticResource LightBackground}, Light={StaticResource Gray600}}"
                            />
+                    
+                    <!--<Label Text="Eliminar"
+                           Grid.Column="3" 
+                           FontAttributes="Bold"
+                           TextColor="{AppThemeBinding Dark={StaticResource LightBackground}, Light={StaticResource Gray600}}"
+                           />-->
+                    
                 </Grid>
 
                 <ScrollView Grid.Row="1">
@@ -60,15 +64,14 @@
                                 Grid.Row="1"
                                 BackgroundColor="White"
                                     VerticalOptions="Start"
-                                    SelectionMode="Single"
                                     SelectedItem="{Binding CurrentSingerDto}"
-                                    SelectionChangedCommand="{Binding EditSingerCommand}"
                                 >
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <Grid ColumnDefinitions="2*,2*,1.2*" 
-                                 Padding="8" 
-                                 ColumnSpacing="50"
+                                <Grid ColumnDefinitions="0.4*,0.7*,1*" 
+                                 Padding="5" 
+                                 ColumnSpacing="20"
+                                  BackgroundColor="{Binding HexColor}"
                                  >
                                 <Label Text="{Binding Code}" 
                                  Grid.Column="0"
@@ -77,20 +80,52 @@
                                  TextColor="{AppThemeBinding Dark={StaticResource Gray400}, Light={StaticResource Gray400}}"
                                  />
 
-                                <Label Text="{Binding FirstName}" 
+                                <Label Text="{Binding FullName}" 
                                  TextColor="{AppThemeBinding Dark={StaticResource Gray400}, Light={StaticResource Gray400}}"
                                  FontAttributes="Bold"
                                  Grid.Column="1"
                                  />
                                 
                                 <Label Text="{Binding VocalRange}" 
-                                     Grid.Column="3"
+                                     Grid.Column="2"
                                      FontAttributes="Bold"
                                      TextColor="{AppThemeBinding Dark={StaticResource Gray400}, Light={StaticResource Gray400}}"
-                                     HorizontalOptions="Center"
+                                     HorizontalOptions="Start"
                                      />
+                                <Label Text="{Static icon:FluentUI.delete_48_regular}"
+                                        FontFamily="{Static icon:FluentUI.FontFamily}"
+                                       HorizontalOptions="End"
+                                       VerticalOptions="Center"
+                                        FontAttributes="Bold"
+                                       FontSize="22"
+                                       Margin="20,0,22,0"
+                                       Grid.Column="3"
+                                       TextColor="PaleVioletRed"
+                                        >
+                                    <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.DeleteSingerCommand}"
+                                                                  CommandParameter="{Binding .}"
+                                                                  />
+                                    </Label.GestureRecognizers>
+                                </Label>
+                                <Label Text="{Static icon:FluentUI.edit_48_regular}"
+                                        FontFamily="{Static icon:FluentUI.FontFamily}"
+                                     HorizontalOptions="End"
+                                       VerticalOptions="Center"
+                                        FontAttributes="Bold"
+                                       FontSize="22"
+                                       Margin="20,0,62,1"
+                                       Grid.Column="3"
+                                       TextColor="DarkSlateBlue"
+                                        >
+                                    <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.EditSingerCommand}"
+                                                                  CommandParameter="{Binding .}"
+                                                                  />
+                                    </Label.GestureRecognizers>
+                                </Label>
 
-                            </Grid>
+                                </Grid>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
@@ -101,24 +136,43 @@
         <Border HorizontalOptions="End"
                 VerticalOptions="End"
                 StrokeShape="RoundRectangle 100"
-                Padding="9.5,9.5,6,6"
-                Margin="0,30,30,0"
+                Padding="9.5,9.5,6,-3"
+                Margin="0,30,30,30"
                 Grid.Row="2"
                 >
 
             <Label Text="{Static icon:FluentUI.add_12_regular}"
-                    FontFamily="{Static icon:FluentUI.FontFamily}"
-                    VerticalOptions="Center"
+                   FontFamily="{Static icon:FluentUI.FontFamily}"
+                   VerticalOptions="Center"
                    FontAttributes="Bold"
                    FontSize="38"
                    HorizontalTextAlignment="Center"
                    VerticalTextAlignment="Center"
-                    Margin="0,0,0,0"
+                   Margin="0,0,0,0"
                    Padding="0"
                    HorizontalOptions="Center"/>
             <Border.GestureRecognizers>
                 <TapGestureRecognizer Command="{Binding  CreateSingerCommand}"/>
             </Border.GestureRecognizers>
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup Name="CommonStates">
+                    <VisualState Name="Normal">
+                        <VisualState.Setters>
+                            <Setter Property="BackgroundColor" Value="LightGray" />
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState Name="PointerOver">
+                        <VisualState.Setters>
+                            <Setter Property="BackgroundColor" Value="LightBlue" />
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState Name="Pressed">
+                        <VisualState.Setters>
+                            <Setter Property="BackgroundColor" Value="SteelBlue" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
         </Border>
        
         </Grid>

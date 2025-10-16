@@ -15,6 +15,8 @@ public partial class CreateSingersPageModel : BasePageModel
     private bool isGenderSelected = false;
     [ObservableProperty]
     private bool isCreatingSinger;
+    [ObservableProperty]
+    private SingersDto? editSingerDto;
 
     [ObservableProperty]
     private string? createOrUpDate;
@@ -30,21 +32,30 @@ public partial class CreateSingersPageModel : BasePageModel
     {
         Task.Run(async () =>
         {
-            var singerId = Preferences.Get(GlobalVariables.SingerId, -1);
-
-            var singer = await singersRepository.GetAsync(singerId);
-            if (singer is null)
+            try
             {
-                IsCreatingSinger = true;
-                CreateOrUpDate = "Crear nuevo cantante";
-                return;
+
+                var singerId = Preferences.Get(GlobalVariables.SingerId, -1);
+
+                var singer = await singersRepository.GetAsync(singerId);
+                if (singer is null)
+                {
+                    IsCreatingSinger = true;
+                    CreateOrUpDate = "Crear nuevo cantante";
+                    return;
+                }
+                EditSingerDto = singer.Map<SingersDto>();
+                CurrentSingerDto = EditSingerDto;
+                CurrentGender = GlobalVariables.Genres.FirstOrDefault(x => x.Gender == CurrentSingerDto.GenderId);
+                CurrentVocalRangesDto = GlobalVariables.VocalRanges.FirstOrDefault(x => x.VocalRange == CurrentSingerDto.VocalRangeId);
+                IsGenderSelected = true;
+                IsCreatingSinger = false;
+                CreateOrUpDate = "Editar cantante";
             }
-            CurrentSingerDto = singer.Map<SingersDto>();
-            CurrentGender = GlobalVariables.Genres.FirstOrDefault(x => x.Gender == CurrentSingerDto.GenderId);
-            CurrentVocalRangesDto = GlobalVariables.VocalRanges.FirstOrDefault(x => x.VocalRange == CurrentSingerDto.VocalRangeId);
-            IsGenderSelected = true;
-            IsCreatingSinger = false;
-            CreateOrUpDate = "Editar cantante";
+            catch (Exception e)
+            {
+                await ErrorAlert("Error Song Manager", e.Message);
+            }
         });
     }
     [RelayCommand]
@@ -56,7 +67,6 @@ public partial class CreateSingersPageModel : BasePageModel
             Preferences.Get(GlobalVariables.SingerId, -1);
 
             if (!await SingerDataIsValid()) return;
-
             CurrentSingerDto!.CreationTime = DateTime.Now;
             CurrentSingerDto!.GenderId = CurrentGender!.Gender;
             CurrentSingerDto!.VocalRangeId = CurrentVocalRangesDto!.VocalRange;
@@ -64,14 +74,15 @@ public partial class CreateSingersPageModel : BasePageModel
             if (IsCreatingSinger)
             {
                 await singersRepository.InsertAsync(CurrentSingerDto!.Singer);
+                await SuccessAlert("Éxito", $"Cantante creado exitosamente!!!");
             }
             else
             {
                 await singersRepository.UpdateAsync(CurrentSingerDto!.Singer);
+                await SuccessAlert("Éxito", $"Cambios guardados exitosamente!!!");
             }
-            await SuccessAlert("Éxito", $"Cantante creado exitosamente!!!");
             if (IsCreateMoreOneSinger) return;
-            await PushAsync<SingersPage>();
+            await GoBack();
         }
         catch (Exception ex)
         {

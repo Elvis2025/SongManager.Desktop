@@ -98,9 +98,17 @@ public class SQLiteRepository<TEntity> : IRepository<TEntity> where TEntity : IB
         }
     }
 
-    public Task<TEntity> GetAsync(object id)
+    public async Task<TEntity> GetAsync(object id)
     {
-        return connection.GetAsync<TEntity>(id);
+        try
+        {
+            return await connection.FindAsync<TEntity>(id);
+        }
+        catch (Exception e)
+        {
+            await BasePageModel.ErrorAlert("Error", e.Message);
+            return new();
+        }
     }
     #endregion
 

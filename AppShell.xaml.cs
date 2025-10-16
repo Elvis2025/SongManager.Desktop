@@ -19,11 +19,11 @@ namespace SongManager.Desktop
         {
             try
             {
+                SongManagerApp.RegisterAsRoutes();
                 var currentTheme = Application.Current!.RequestedTheme;
                 ThemeSegmentedControl.SelectedIndex = currentTheme == AppTheme.Light ? 0 : 1;
                 var managerSqlite = SongManagerApp.CreateInstance<ISQLiteManager>();
                 managerSqlite.CreateTablesUnAsync();
-                TestData.InsertTestDataAsync();
             }
             catch (Exception e )
             {

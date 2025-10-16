@@ -9,31 +9,28 @@
                        xmlns:controls="clr-namespace:SongManager.Desktop.Pages.Singers"
                        xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
                        x:TypeArguments="pageModel:CreateSingersPageModel"
-                       BackgroundColor="Transparent"
-                       Padding="150,100,150,100"
+                       BackgroundColor="#97000000"
+                       Padding="200,50,200,50"
                        MinimumHeightRequest="500"
                        MinimumWidthRequest="500"
+                       Shell.PresentationMode="Modal"
                        >
-    <Border Padding="0"
-          
-            >
+    <Border Padding="0">
         <ScrollView>
-            
-        <VerticalStackLayout BackgroundColor="{StaticResource Gray600}">
-            <Grid RowDefinitions="*,*,*">
-                
-                <Grid RowDefinitions="Auto,Auto"
-                      >
-                    <Label Text="{Static icon:FluentUI.arrow_left_16_regular}"
+            <VerticalStackLayout BackgroundColor="{StaticResource Gray600}">
+                <Grid RowDefinitions="*,*,*">
+
+                    <Grid RowDefinitions="Auto,Auto">
+                        <Label Text="{Static icon:FluentUI.arrow_left_16_regular}"
                            FontFamily="{Static icon:FluentUI.FontFamily}"
                            FontSize="26"
                            Padding="26"
                            FontAttributes="Bold"
                            >
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding PopModalCommand}"/>
-                        </Label.GestureRecognizers>
-                    </Label>
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding GoBackCommand}"/>
+                            </Label.GestureRecognizers>
+                        </Label>
 
                         <Label Text="{Binding CreateOrUpDate}"
                            FontFamily="{Static icon:FluentUI.FontFamily}"
@@ -41,36 +38,47 @@
                            Padding="26"
                            FontAttributes="Bold"
                            Grid.Row="0"
-                           HorizontalOptions="Center"
-                           />
-                </Grid>
-                <Grid Grid.Row="1"
+                           HorizontalOptions="Center"/>
+
+                        <Label Text="{Static icon:FluentUI.checkmark_24_regular}"
+                           FontFamily="{Static icon:FluentUI.FontFamily}"
+                           FontSize="26"
+                           Padding="26"
+                           FontAttributes="Bold"
+                           HorizontalOptions="End"
+                        >
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding CreateSingerCommand}"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </Grid>
+                    <Grid Grid.Row="1"
                       RowDefinitions="*,*,*,*,*,*,*"
                       Margin="60,40,60,0"
                       RowSpacing="18"
                       >
-                    <Entry Placeholder="Primer nombre"
+                        <Entry Placeholder="Primer nombre"
                            Text="{Binding CurrentSingerDto.FirstName}"
                            />
-               
-                    <Entry Placeholder="Segundo nombre"
+
+                        <Entry Placeholder="Segundo nombre"
                            Grid.Row="1"
                            Text="{Binding CurrentSingerDto.SecondName}"
                            />
-               
-                    <Entry Placeholder="Primer apellido"
+
+                        <Entry Placeholder="Primer apellido"
                            Grid.Row="2"
                            Text="{Binding CurrentSingerDto.FirstSurname}"
                            
                            />
 
-                    <Entry Placeholder="Segundo apellido"
+                        <Entry Placeholder="Segundo apellido"
                            Grid.Row="3"
                            Text="{Binding CurrentSingerDto.SecondSurname}"
                            />
 
 
-                    <Picker Grid.Row="4"
+                        <Picker Grid.Row="4"
                             Title="Genero"
                             TitleColor="{StaticResource Gray300}"
                             TextColor="{StaticResource Gray100}"
@@ -78,9 +86,9 @@
                             ItemDisplayBinding="{Binding Name}"
                             SelectedItem="{Binding CurrentGender}"
                             SelectedIndexChanged="GenderChange">
-                    </Picker>
-                    
-                    <Picker Title="Rango Vocal"
+                        </Picker>
+
+                        <Picker Title="Rango Vocal"
                             Grid.Row="5"
                             IsVisible="{Binding IsGenderSelected}"
                             TitleColor="{StaticResource Gray300}"
@@ -89,32 +97,31 @@
                             ItemDisplayBinding="{Binding Name}"
                             SelectedItem="{Binding CurrentVocalRangesDto}"
                            />
-                    
-                    
-                    <HorizontalStackLayout Grid.Row="6">
 
-                        <CheckBox Grid.Row="5"
+
+                        <HorizontalStackLayout Grid.Row="6">
+
+                            <CheckBox Grid.Row="5"
                                   IsChecked="{Binding IsCreateMoreOneSinger}"
                                   Color="Green"
                                   Scale="1.5"
                                   Margin="0,2,0,0"
                                   VerticalOptions="Center"
                                   />
-                        <Label Text="¿ Deseas crear mas de un cantante ?"
+                            <Label Text="¿ Deseas crear mas de un cantante ?"
                                VerticalOptions="Center"
                                VerticalTextAlignment="Center"
                                />
-                    </HorizontalStackLayout>
-                </Grid>
-                <Button Grid.Row="2"
+                        </HorizontalStackLayout>
+                    </Grid>
+                    <Button Grid.Row="2"
                         Margin="60"
                         VerticalOptions="End"
                         Text="Guardar"
                         Command="{Binding CreateSingerCommand}"
                         />
-            </Grid>
-        </VerticalStackLayout>
-        
+                </Grid>
+            </VerticalStackLayout>
         </ScrollView>
     </Border>
 </pages:BaseContentPage>

@@ -12,13 +12,16 @@ public record class SingersDto : BaseDto<long>
     public string Code => (FirstName.Length > 0 && FirstSurname.Length > 0 ? 
                            $"{FirstName[0]}{FirstSurname[0]}-{Id}" : "");
     public string FirstName { get; set; } = string.Empty;
+
     public string SecondName { get; set; } = string.Empty;
     public string FirstSurname { get; set; } = string.Empty;
     public string SecondSurname { get; set; } = string.Empty;
     public string Gender => GenderId.ToString();
-    public string VocalRange => (int)VocalRangeId >= 0 ? VocalRangeId.ToString(): string.Empty;
+    public string VocalRange => (VocalRangeId.ToString().Contains('_') ? 
+                                    VocalRangeId.ToString().Replace('_', ' ') : VocalRangeId.ToString());
     public Gender GenderId { get; set; }
-    public VocalRange VocalRangeId { get; set; }
+    public VocalRange VocalRangeId { get; set; } = Enum.VocalRange.None;
     public Singers Singer => this.Map<Singers>();
 
+    public Color? HexColor { get; set; }
 }

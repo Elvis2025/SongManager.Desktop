@@ -96,6 +96,24 @@ public abstract partial class BasePageModel : ObservableObject
         }
     }
 
+    [RelayCommand]
+    public async Task GoBack()
+    {
+        try
+        {
+            await Shell.Current.GoToAsync("..");
+        }
+        catch (Exception e)
+        {
+            Debug.Write(e.Message);
+            await ErrorAlert("Song manager navigation Error", e.Message);
+        }
+        finally
+        {
+            IsBusy = false;
+        }
+
+    }
 
     public static async Task PushAsync<T>(T Page) where T : ContentPage
     {

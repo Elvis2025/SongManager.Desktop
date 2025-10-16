@@ -26,6 +26,16 @@ public partial class SingersPageModel : BasePageModel
         {
             var singers = await singersRepository.GetAllAsync();
             SingersDto = new(singers.Map<SingersDto>());
+            foreach(var (singer, i) in SingersDto.Select((value, i) => (value, i)))
+            {
+                if((i % 2) == 0)
+                {
+                    singer.HexColor = Color.FromArgb("#FFFFFF");
+                    continue;
+                }
+                singer.HexColor = Color.FromArgb("#E1E1E1");
+
+            }
         });
     }
     [RelayCommand]
@@ -34,7 +44,8 @@ public partial class SingersPageModel : BasePageModel
         IsBusy = true;
         try
         {
-            await PushModalAsync<CreateSingersPage>();
+            Preferences.Set(GlobalVariables.SingerId, -1);
+            await PushRelativePageAsync<CreateSingersPage>();
         }
         catch (Exception ex)
         {
@@ -48,13 +59,35 @@ public partial class SingersPageModel : BasePageModel
 
 
     [RelayCommand]
-    public async Task EditSinger()
+    public async Task EditSinger(SingersDto singerDto)
     {
         IsBusy = true;
         try
-        { if (CurrentSingerDto is null || CurrentSingerDto!.Id < 0) return;
-            Preferences.Set(GlobalVariables.SingerId, CurrentSingerDto!.Id);
+        {   
+            if (singerDto is null || singerDto!.Id < 0) return;
+            Preferences.Set(GlobalVariables.SingerId, singerDto!.Id);
             await PushModalAsync<CreateSingersPage>();
+        }
+        catch (Exception ex)
+        {
+            await ErrorAlert("Error", $"Failed to creating singers: {ex.Message}");
+        }
+        finally
+        {
+            IsBusy = false;
+            CurrentSingerDto = new();
+        }
+    }
+    
+    [RelayCommand]
+    public async Task DeleteSinger(SingersDto singerDto)
+    {
+        IsBusy = true;
+        try
+        {   
+            if (singerDto is null || singerDto!.Id < 0) return;
+            await singersRepository.DeleteAsync(singerDto.Singer);
+            Init();
         }
         catch (Exception ex)
         {
