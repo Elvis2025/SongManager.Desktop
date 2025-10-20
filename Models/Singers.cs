@@ -1,10 +1,4 @@
-﻿using AutoMapper.Configuration.Annotations;
-using SongManager.Desktop.Attributes;
-using SongManager.Desktop.DTOs;
-using SongManager.Desktop.Enum;
-using SongManager.Desktop.Extensions;
-
-namespace SongManager.Desktop.Models;
+﻿namespace SongManager.Desktop.Models;
 [SQLiteEntity]
 public class Singers : BaseEntity<long>
 {

@@ -1,7 +1,4 @@
-﻿using SongManager.Desktop.Models;
-using SQLite;
-
-namespace SongManager.Desktop.DTOs;
+﻿namespace SongManager.Desktop.DTOs;
 
 public abstract record class BaseDto<TPrimaryKey> : IBaseEntity
 {

@@ -62,4 +62,5 @@ public abstract class GlobalVariables
         ];
 
     public static readonly string SingerId = "SingerId";
+    public static readonly string SongId = "SongId";
 }

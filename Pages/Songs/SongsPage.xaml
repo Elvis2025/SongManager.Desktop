@@ -16,13 +16,13 @@
           
           >
         <Label Text="Listado de canciones"
-     FontAttributes="Bold"
-     FontSize="36"
-     HorizontalOptions="Center"
-     VerticalOptions="Center"
-     Margin="0,0,0,20"
-        Grid.Row="0"
-     TextColor="{AppThemeBinding Dark={StaticResource LightBackground},Light={StaticResource Gray600}}"
+               FontAttributes="Bold"
+               FontSize="36"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               Margin="0,0,0,20"
+               Grid.Row="0"
+               TextColor="{AppThemeBinding Dark={StaticResource LightBackground},Light={StaticResource Gray600}}"
      />
 
 
@@ -31,9 +31,9 @@
             <Grid RowDefinitions="Auto,*" BackgroundColor="White"
               >
 
-                <Grid ColumnDefinitions="2*,3*,2*,1*,1*"
-                      Padding="5"
-                      ColumnSpacing="25"
+                <Grid ColumnDefinitions="3*,4*,3*,2.5*"
+                      Padding="0,5"
+                      ColumnSpacing="15"
                       Grid.Row="0"
                       BackgroundColor="{AppThemeBinding Dark={StaticResource Gray600}, Light={StaticResource Gray300}}">
                     <Label Text="Cantante" 
@@ -49,12 +49,13 @@
                     <Label Text="Autor" 
                            Grid.Column="2" 
                            FontAttributes="Bold"
+                           HorizontalOptions="Start"
                            TextColor="{AppThemeBinding Dark={StaticResource LightBackground}, Light={StaticResource Gray600}}"/>
 
                     <Label Text="Tono"
                            Grid.Column="3" 
                            FontAttributes="Bold"
-                           HorizontalOptions="Center"
+                           HorizontalOptions="Start"
                            TextColor="{AppThemeBinding Dark={StaticResource LightBackground}, Light={StaticResource Gray600}}"/>
                 </Grid>
 
@@ -63,11 +64,11 @@
                     
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <Grid ColumnDefinitions="2*,3*,2*,1.2*,1*" 
-                            Padding="5" 
-                            BackgroundColor="White"
+                                <Grid ColumnDefinitions="3*,4*,3*,2.5*" 
+                            Padding="0,5"
+                            BackgroundColor="{Binding HexColor}"
                           
-                            ColumnSpacing="25"
+                            ColumnSpacing="15"
                             >
                                 <Label Text="{Binding Singer}" 
                                 Grid.Column="0"
@@ -87,14 +88,15 @@
                                 Grid.Column="2"
                                 TextColor="{AppThemeBinding Dark={StaticResource Gray400}, Light={StaticResource Gray400}}"
                                 FontAttributes="Bold"
-                           
+                                        HorizontalOptions="Start"
                                 />
 
                                 <Label Text="{Binding KeySignatureValue}" 
                                 Grid.Column="3"
                                 FontAttributes="Bold"
                                 TextColor="{AppThemeBinding Dark={StaticResource Gray400}, Light={StaticResource Gray400}}"
-                                HorizontalOptions="Center"
+                                HorizontalOptions="Start"
+                                       Margin="15,0,0,0"
                                 />
                                     <Label Text="{Static icon:FluentUI.delete_48_regular}"
                                             FontFamily="{Static icon:FluentUI.FontFamily}"
@@ -102,12 +104,12 @@
                                            VerticalOptions="Center"
                                             FontAttributes="Bold"
                                            FontSize="22"
-                                           Margin="20,0,22,0"
-                                           Grid.Column="4"
+                                           Margin="4,0,12,0"
+                                           Grid.Column="3"
                                            TextColor="PaleVioletRed"
                                             >
                                         <Label.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.DeleteSingerCommand}"
+                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.DeleteSongCommand}"
                                   CommandParameter="{Binding .}"
                                   />
                                         </Label.GestureRecognizers>
@@ -118,12 +120,12 @@
                                            VerticalOptions="Center"
                                             FontAttributes="Bold"
                                            FontSize="22"
-                                           Margin="20,0,62,1"
-                                           Grid.Column="4"
+                                           Margin="14,0,46,1"
+                                           Grid.Column="3"
                                            TextColor="DarkSlateBlue"
                                             >
                                         <Label.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.EditSingerCommand}"
+                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.EditSongCommand}"
                                   CommandParameter="{Binding .}"
                                   />
                                         </Label.GestureRecognizers>

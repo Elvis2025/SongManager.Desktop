@@ -1,6 +1,4 @@
-﻿using SongManager.Desktop.Enum;
-
-namespace SongManager.Desktop.DTOs;
+﻿namespace SongManager.Desktop.DTOs;
 
 public record class VocalRangeDto : BaseDto<byte>
 {

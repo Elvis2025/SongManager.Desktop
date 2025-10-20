@@ -1,12 +1,9 @@
-﻿using SongManager.Desktop.Attributes;
-using SongManager.Desktop.DTOs;
-using SongManager.Desktop.Enum;
-using SongManager.Desktop.Extensions;
+﻿using SongManager.Desktop.Enum;
 using SQLite;
 
 namespace SongManager.Desktop.Models;
 [SQLiteEntity]
-public class SongsLists : BaseEntity<long>
+public class Songs : BaseEntity<long>
 {
     [Indexed(Name = "idx_songname_songauthor_singer_key", Order = 1, Unique = true)]
     public string SongName { get; set; } = string.Empty;
@@ -16,8 +13,8 @@ public class SongsLists : BaseEntity<long>
     public string Singer { get; set; } = string.Empty;
     [Indexed(Name = "idx_songname_songauthor_singer_key", Order = 4, Unique = true)]
     public Key KeySignature { get; set; } = Key.NA;
-
+    public string Comment { get; set; } = string.Empty;
     public string Link { get; set; } = string.Empty;
     [Ignore]    
-    public SongsListsDto SongsListDto => this.Map<SongsListsDto>();
+    public SongsDto SongDto => this.Map<SongsDto>();
 }

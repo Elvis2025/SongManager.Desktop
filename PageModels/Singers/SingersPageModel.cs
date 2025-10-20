@@ -38,6 +38,7 @@ public partial class SingersPageModel : BasePageModel
             }
         });
     }
+
     [RelayCommand]
     public async Task CreateSinger()
     {

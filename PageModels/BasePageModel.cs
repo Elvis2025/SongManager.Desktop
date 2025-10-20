@@ -17,7 +17,19 @@ public abstract partial class BasePageModel : ObservableObject
     private VocalRangeDto? currentVocalRangesDto = new();
     [ObservableProperty]
     private GenderDto? currentGender = new();
-  
+    [ObservableProperty]
+    private bool isGenderSelected = false;
+
+
+    public void GenderSelected()
+    {
+        if (CurrentGender is null || CurrentGender.Gender == Gender.None) return;
+        VocalRangesDto = GlobalVariables.VocalRanges
+                         .Where(x => x.Gender == CurrentGender!.Gender)
+                         .ToObservableCollection();
+        CurrentVocalRangesDto = new();
+        IsGenderSelected = true;
+    }
     public static async Task SuccessAlert(string title, string message)
     {
         await Shell.Current.DisplayAlert(title, message, SongManagerResources.Ok);

@@ -1,9 +1,4 @@
-﻿using SongManager.Desktop.Attributes;
-using SongManager.Desktop.Enum;
-using SongManager.Desktop.Extensions;
-using SongManager.Desktop.Models;
-
-namespace SongManager.Desktop.DTOs;
+﻿namespace SongManager.Desktop.DTOs;
 
 [AutoMap(typeof(Singers))]
 public record class SingersDto : BaseDto<long>

@@ -11,8 +11,7 @@ public partial class CreateSingersPageModel : BasePageModel
     private readonly IRepository<Singers> singersRepository;
     [ObservableProperty]
     private bool isCreateMoreOneSinger;
-    [ObservableProperty]
-    private bool isGenderSelected = false;
+
     [ObservableProperty]
     private bool isCreatingSinger;
     [ObservableProperty]
@@ -94,15 +93,7 @@ public partial class CreateSingersPageModel : BasePageModel
         }
     }
 
-    public void GenderSelected()
-    {
-        if (CurrentGender is null || CurrentGender.Gender == Gender.None) return;
-        VocalRangesDto = GlobalVariables.VocalRanges
-                         .Where(x => x.Gender == CurrentGender!.Gender)
-                         .ToObservableCollection();
-        CurrentVocalRangesDto = new();
-        IsGenderSelected = true;
-    }
+    
     public async Task<bool> SingerDataIsValid()
     {
         if (CurrentSingerDto is null || CurrentSingerDto.Singer is null)

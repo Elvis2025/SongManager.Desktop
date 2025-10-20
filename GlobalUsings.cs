@@ -13,3 +13,7 @@ global using SongManager.Desktop.Repositories.SQLite;
 global using SongManager.Desktop.UsesCases;
 global using SongManager.Desktop.Resx;
 global using System.Diagnostics;
+global using SongManager.Desktop.Enum;
+global using CommunityToolkit.Maui.Core.Extensions;
+global using SongManager.Desktop.Constants;
+global using SQLite;
