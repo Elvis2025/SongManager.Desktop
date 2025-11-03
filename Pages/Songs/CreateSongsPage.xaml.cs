@@ -2,23 +2,13 @@ using SongManager.Desktop.PageModels;
 
 namespace SongManager.Desktop.Pages.Songs;
 [RegisterAsRoute]
-public partial class CreateSongsPage : BaseContentPage<CreateSongsPageModel>
+public partial class CreateSongsPage : ContentPage
 {
-    private readonly CreateSongsPageModel basePageModel;
-    private readonly IRepository<Models.Singers> singerRepository;
-
-
-    public CreateSongsPage(CreateSongsPageModel basePageModel) : base(basePageModel)
+    public CreateSongsPage(CreateSongsPageModel basePageModel)
     {
         InitializeComponent();
-        this.basePageModel = basePageModel;
-        this.singerRepository = singerRepository;
+        BindingContext = basePageModel;
     }
 
-    public void Init()
-    {
-
-    }
-
-   
+    
 }

@@ -4,6 +4,7 @@
 public record class SingersDto : BaseDto<long>
 {
     public string FullName => $"{FirstName} {FirstSurname}";
+    public string FullNameComplete => $"{FirstName} {SecondName} {FirstSurname} {SecondSurname}";
     public string Code => (FirstName.Length > 0 && FirstSurname.Length > 0 ? 
                            $"{FirstName[0]}{FirstSurname[0]}-{Id}" : "");
     public string FirstName { get; set; } = string.Empty;

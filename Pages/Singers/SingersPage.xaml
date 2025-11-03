@@ -92,7 +92,7 @@
                                      TextColor="{AppThemeBinding Dark={StaticResource Gray400}, Light={StaticResource Gray400}}"
                                      HorizontalOptions="Start"
                                      />
-                                <Label Text="{Static icon:FluentUI.delete_48_regular}"
+                                    <Label Text="{Static icon:FluentUI.Ic_fluent_delete_48_regular}"
                                         FontFamily="{Static icon:FluentUI.FontFamily}"
                                        HorizontalOptions="End"
                                        VerticalOptions="Center"
@@ -108,7 +108,7 @@
                                                                   />
                                     </Label.GestureRecognizers>
                                 </Label>
-                                <Label Text="{Static icon:FluentUI.edit_48_regular}"
+                                    <Label Text="{Static icon:FluentUI.Ic_fluent_edit_48_regular}"
                                         FontFamily="{Static icon:FluentUI.FontFamily}"
                                      HorizontalOptions="End"
                                        VerticalOptions="Center"
@@ -141,7 +141,7 @@
                 Grid.Row="2"
                 >
 
-            <Label Text="{Static icon:FluentUI.add_12_regular}"
+            <Label Text="{Static icon:FluentUI.Ic_fluent_add_12_regular}"
                    FontFamily="{Static icon:FluentUI.FontFamily}"
                    VerticalOptions="Center"
                    FontAttributes="Bold"

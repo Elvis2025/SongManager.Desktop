@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SongManager.Desktop.Controls.SearchablePicker"
+             x:Name="Root"
+             >
+
+    <VerticalStackLayout>
+        <!-- Buscador -->
+        <Entry Margin="100"
+               Placeholder="Buscar..."
+               Text="{Binding Key,Source={x:Reference Root}}"
+               />
+
+        <!-- Lista de opciones -->
+        <CollectionView ItemsSource="{Binding ItemsSource, Source={x:Reference Root}}"
+                        SelectionMode="Single"
+                        SelectedItem="{Binding SelectedItem, Source={x:Reference Root}}"
+                        >
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Label Text="{Binding DisplayText}" 
+                           Padding="10" 
+                           FontSize="26"
+                           HorizontalOptions="Start"
+                           HorizontalTextAlignment="Start"
+                           />
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </VerticalStackLayout>
+
+</ContentView>

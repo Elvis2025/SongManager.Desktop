@@ -1,27 +1,33 @@
 ﻿
+using SongManager.Desktop.Pages.Modals;
+
 namespace SongManager.Desktop.PageModels;
 [RegisterPageModel]
 public partial class CreateSongsPageModel : BasePageModel
 {
-    private readonly IRepository<Singers> singerRepository;
-    [ObservableProperty]
-    private ObservableCollection<SingersDto>? singers;
-    public CreateSongsPageModel(IRepository<Singers> singerRepository)
-    {
-        this.singerRepository = singerRepository;
-    }
+    #region Oberservable Properties
 
-    private async Task LoadSingersAsync()
+    [ObservableProperty]
+    private SongsDto? song = new();
+
+    #endregion
+
+    public Action<SongsDto>? OnSaveSong;
+
+    
+    [RelayCommand]
+    public async Task SaveSongAsync()
     {
+        
         try
         {
-            var singers = await singerRepository.GetAllAsync();
-            Singers = new(singers.Map<SingersDto>());
+            OnSaveSong?.Invoke(Song!);
         }
         catch (Exception ex)
         {
-            await ErrorAlert("Error", $"Failed to load singers: {ex.Message}");
+            await ErrorAlert("Error", $"Failed to save song: {ex.Message}");
         }
     }
+
 
 }

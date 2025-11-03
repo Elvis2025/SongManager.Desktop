@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SongManager.Desktop.Pages.Modals.SelectKeyModalPage"
+             Title="SelectKeyModalPage"
+             Shell.PresentationMode="ModalAnimated"
+                      BackgroundColor="#97000000"
+            Padding="200,50,200,50"
+            MinimumHeightRequest="500"
+            MinimumWidthRequest="500">
+    <Border Margin="0" Padding="0"
+            >
+        <Grid BackgroundColor="{StaticResource Gray900}">
+            <Label Text="Selecciona el tono de la canción"
+                   Margin="20,20"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   />
+            <Entry Margin="20,62"
+               Placeholder="Buscar..."
+               Text="{Binding Key}"
+               VerticalOptions="Start"
+               TextChanged="FindKey"
+            />
+
+        <CollectionView ItemsSource="{Binding Keys}"
+                        SelectionMode="Multiple"
+                        SelectedItems="{Binding CurrentKeysSelected}"
+                        SelectionChangedCommand="{Binding SelectKeyCommand}"
+                        SelectionChangedCommandParameter="{Binding Source={x:Reference KeysCV}, Path=SelectedItems}"
+                        Margin="0,120,0,80"
+                        x:Name="KeysCV"
+                     >
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                        <Label Text="{Binding Name}" 
+                           Padding="10" 
+                           FontSize="26"
+                           HorizontalOptions="Start"
+                           HorizontalTextAlignment="Start"/>
+                    </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+            <Button Text="Cancelar"
+                    VerticalOptions="End"
+                    HorizontalOptions="Start"
+                    Margin="20"
+                    FontAttributes="Bold"
+                    BackgroundColor="DarkRed"
+                    Command="{Binding PopModalCommand}"
+                    />
+            
+            <Button Text="Siguente"
+                    VerticalOptions="End"
+                    HorizontalOptions="End"
+                    Margin="20"
+                    FontAttributes="Bold"
+                    BackgroundColor="DarkGreen"
+                    Command="{Binding NextCommand}"
+                    />
+
+            <Button Text="Atrás"
+                   VerticalOptions="End"
+                   HorizontalOptions="End"
+                   Margin="0,0,148,20"
+                   FontAttributes="Bold"
+                   TextColor="{StaticResource Gray100}"
+                   BackgroundColor="Transparent"
+                  BorderColor="DarkGreen"
+                  BorderWidth="2"
+                  HeightRequest="48"
+                  CornerRadius="12"
+                   Command="{Binding GoModalBackActionCommand}"
+                   />
+
+        </Grid>
+    </Border>
+</ContentPage>

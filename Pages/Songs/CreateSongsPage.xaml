@@ -1,127 +1,182 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<pages:BaseContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
                        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                        x:Class="SongManager.Desktop.Pages.Songs.CreateSongsPage"
                        xmlns:pages="clr-namespace:SongManager.Desktop.Pages"
                        xmlns:pageModel="clr-namespace:SongManager.Desktop.PageModels"
                        xmlns:resources="clr-namespace:SongManager.Desktop.Resx"
                        xmlns:icon="clr-namespace:SongManager.Desktop.UsesCases.IconFont"
-                       xmlns:controls="clr-namespace:SongManager.Desktop.Pages.Songs"
+                       xmlns:controls="clr-namespace:SongManager.Desktop.Controls"
                        xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-                       x:TypeArguments="pageModel:CreateSongsPageModel"
                       BackgroundColor="#97000000"
                       Padding="200,50,200,50"
                       MinimumHeightRequest="500"
                       MinimumWidthRequest="500"
                       Shell.PresentationMode="Modal"
                        >
-    <Border Padding="0">
-        <ScrollView>
-            <VerticalStackLayout BackgroundColor="{StaticResource Gray600}">
-                <Grid RowDefinitions="*,*,*">
+    <Grid RowDefinitions="*">
+        <Border Padding="0">
+            <Grid BackgroundColor="{StaticResource Gray600}"
+                              RowDefinitions="*"
+                              >
+                <ScrollView Margin="0,0,0,72">
+                    <VerticalStackLayout Margin="60,20"
+                                                 Spacing="10"
+                                                 >
+                        <Label Text="Datos de la canción"
+                               HorizontalOptions="Center"
+                               FontAttributes="Bold"
+                               FontSize="28"
+                               />
+                        <Border HeightRequest="70">
+                            <HorizontalStackLayout Spacing="8">
+                                <Label Text="Cantante"
+                                               FontAttributes="Bold"
+                                               FontSize="20"
+                                               WidthRequest="110"
+                                               />
+                                <Entry Text="{Binding Song.SingerName}"
+                                               Placeholder="Digita el nombre del autor"
+                                               HeightRequest="80"
+                                               WidthRequest="1900"
+                                               FontSize="20"
+                                               VerticalOptions="Center"
+                                               HorizontalOptions="Center"
+                                               IsReadOnly="True"
+                                             />
+                            </HorizontalStackLayout>
+                        </Border>
 
-                    <Grid RowDefinitions="Auto,Auto">
-                        <Label Text="{Static icon:FluentUI.arrow_left_16_regular}"
-                       FontFamily="{Static icon:FluentUI.FontFamily}"
-                       FontSize="26"
-                       Padding="26"
-                       FontAttributes="Bold"
-                       >
-                            <Label.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding GoBackCommand}"/>
-                            </Label.GestureRecognizers>
-                        </Label>
+                        <Border HeightRequest="70">
+                            <HorizontalStackLayout Spacing="8">
+                                <Label Text="Tono"
+                                               FontAttributes="Bold"
+                                               FontSize="20"
+                                               WidthRequest="110"
+                                               />
+                                <Entry Text="{Binding Song.Key}"
+                                                HeightRequest="80"
+                                                WidthRequest="1900"
+                                                FontSize="20"
+                                                VerticalOptions="Center"
+                                                HorizontalOptions="Center"
+                                            />
+                            </HorizontalStackLayout>
+                        </Border>
 
-                        <Label Text="{Binding CreateOrUpDate}"
-                       FontFamily="{Static icon:FluentUI.FontFamily}"
-                       FontSize="26"
-                       Padding="26"
-                       FontAttributes="Bold"
-                       Grid.Row="0"
-                       HorizontalOptions="Center"/>
+                        <Border  HeightRequest="70">
+                            <HorizontalStackLayout Spacing="8">
+                                <Label Text="Canción"
+                                               FontSize="20"
+                                               FontAttributes="Bold"
+                                               WidthRequest="110"
+                                               />
+                                <Entry Text="{Binding Song.SongName}"
+                                               Placeholder="Digita el nombre de la cancion"
+                                               HeightRequest="80"
+                                               WidthRequest="1900"
+                                               FontSize="15"
+                                               BackgroundColor="Transparent"
+                                               VerticalOptions="Center"
+                                               HorizontalOptions="Center"
+                                           />
+                            </HorizontalStackLayout>
+                        </Border>
 
-                        <Label Text="{Static icon:FluentUI.checkmark_24_regular}"
-                       FontFamily="{Static icon:FluentUI.FontFamily}"
-                       FontSize="26"
-                       Padding="26"
-                       FontAttributes="Bold"
-                       HorizontalOptions="End"
-                    >
-                            <Label.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding CreateSingerCommand}"/>
-                            </Label.GestureRecognizers>
-                        </Label>
-                    </Grid>
-                    <Grid Grid.Row="1"
-                  RowDefinitions="*,*,*,*,*,*,*"
-                  Margin="60,40,60,0"
-                  RowSpacing="18"
-                  >
-                        <Entry Placeholder="Primer nombre"
-                       Text="{Binding CurrentSingerDto.FirstName}"
-                       />
+                        <Border  HeightRequest="70">
+                            <HorizontalStackLayout Spacing="8">
+                                <Label Text="Link"
+                                               FontSize="20"
+                                               FontAttributes="Bold"
+                                                WidthRequest="110"
+                                               />
+                                <Entry Text="{Binding Song.Link}"
+                                           Placeholder="Digita el link de la cancion"
+                                               HeightRequest="80"
+                                               WidthRequest="1900"
+                                               FontSize="15"
+                                               BackgroundColor="Transparent"
+                                               VerticalOptions="Center"
+                                               HorizontalOptions="Center"
+                                           />
+                            </HorizontalStackLayout>
+                        </Border>
 
-                        <Entry Placeholder="Segundo nombre"
-                       Grid.Row="1"
-                       Text="{Binding CurrentSingerDto.SecondName}"
-                       />
-
-                        <Entry Placeholder="Primer apellido"
-                       Grid.Row="2"
-                       Text="{Binding CurrentSingerDto.FirstSurname}"
-                       
-                       />
-
-                        <Entry Placeholder="Segundo apellido"
-                       Grid.Row="3"
-                       Text="{Binding CurrentSingerDto.SecondSurname}"
-                       />
-
-
-                        <Picker Grid.Row="4"
-                        Title="Genero"
-                        TitleColor="{StaticResource Gray300}"
-                        TextColor="{StaticResource Gray100}"
-                        ItemsSource="{Binding Genres}"
-                        ItemDisplayBinding="{Binding Name}"
-                        SelectedItem="{Binding CurrentGender}"
-                        SelectedIndexChanged="GenderChange">
-                        </Picker>
-
-                        <Picker Title="Rango Vocal"
-                        Grid.Row="5"
-                        IsVisible="{Binding IsGenderSelected}"
-                        TitleColor="{StaticResource Gray300}"
-                        TextColor="{StaticResource Gray100}"
-                        ItemsSource="{Binding VocalRangesDto}"
-                        ItemDisplayBinding="{Binding Name}"
-                        SelectedItem="{Binding CurrentVocalRangesDto}"
-                       />
+                        <Border  HeightRequest="70">
+                            <HorizontalStackLayout Spacing="8">
+                                <Label Text="Autor"
+                                               FontSize="20"
+                                               FontAttributes="Bold"
+                                               WidthRequest="110"
+                                               />
+                                <Entry Text="{Binding Song.SongAuthor}"
+                                               Placeholder="Digita el nombre del autor"
+                                               HeightRequest="80"
+                                               WidthRequest="1900"
+                                               FontSize="15"
+                                               VerticalOptions="Center"
+                                               HorizontalOptions="Center"
+                                           />
+                            </HorizontalStackLayout>
+                        </Border>
 
 
-                        <HorizontalStackLayout Grid.Row="6">
+                        <Border  HeightRequest="70">
+                            <HorizontalStackLayout Spacing="8">
+                                <Label Text="Cometario"
+                                               FontSize="20"
+                                               FontAttributes="Bold"
+                                               WidthRequest="110"
+                                               />
+                                <Entry Text="{Binding Song.Comment}"
+                                           Placeholder="Digita algun comentario"
+                                               HeightRequest="1120"
+                                               WidthRequest="1900"
+                                               FontSize="15"
+                                               BackgroundColor="Transparent"
+                                               VerticalOptions="Fill"
+                                               HorizontalOptions="Fill"
+                                           />
+                            </HorizontalStackLayout>
+                        </Border>
 
-                            <CheckBox Grid.Row="5"
-                              IsChecked="{Binding IsCreateMoreOneSinger}"
-                              Color="Green"
-                              Scale="1.5"
-                              Margin="0,2,0,0"
-                              VerticalOptions="Center"
-                              />
-                            <Label Text="¿ Deseas crear mas de un cantante ?"
-                           VerticalOptions="Center"
-                           VerticalTextAlignment="Center"
-                           />
-                        </HorizontalStackLayout>
-                    </Grid>
-                    <Button Grid.Row="2"
-                    Margin="60"
-                    VerticalOptions="End"
-                    Text="Guardar"
-                    Command="{Binding CreateSingerCommand}"
-                    />
-                </Grid>
-            </VerticalStackLayout>
-        </ScrollView>
-    </Border>
-</pages:BaseContentPage>
+                    </VerticalStackLayout>
+                </ScrollView>
+
+                <Button Text="Cancelar"
+                                    VerticalOptions="End"
+                                    HorizontalOptions="Start"
+                                    Margin="20"
+                                    FontAttributes="Bold"
+                                    BackgroundColor="DarkRed"
+                                    Command="{Binding PopModalCommand}"/>
+
+                <Button Text="Guardar"
+                                     VerticalOptions="End"
+                                     HorizontalOptions="End"
+                                     Margin="20"
+                                     FontAttributes="Bold"
+                                     BackgroundColor="DarkGreen"
+                                     Command="{Binding SaveSongCommand}"
+                                     />
+
+
+                <Button Text="Atrás"
+                                   VerticalOptions="End"
+                                   HorizontalOptions="End"
+                                   Margin="0,0,148,20"
+                                   FontAttributes="Bold"
+                                   TextColor="{StaticResource Gray100}"
+                                   BackgroundColor="Transparent"
+                                  BorderColor="DarkGreen"
+                                  BorderWidth="2"
+                                  HeightRequest="48"
+                                  CornerRadius="12"
+                                   Command="{Binding GoModalBackActionCommand}"
+                                   />
+
+            </Grid>
+
+        </Border>
+    </Grid>
+</ContentPage>

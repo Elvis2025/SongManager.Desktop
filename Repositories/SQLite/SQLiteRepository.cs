@@ -1,6 +1,7 @@
 ﻿using SongManager.Desktop.Models;
 using SQLite;
 using System.Linq.Expressions;
+using static SQLite.SQLite3;
 
 namespace SongManager.Desktop.Repositories.SQLite;
 
@@ -23,7 +24,8 @@ public class SQLiteRepository<TEntity> : IRepository<TEntity> where TEntity : IB
         }
         catch (Exception e)
         {
-            await BasePageModel.ErrorAlert("Error", e.Message);
+            Debug.WriteLine(e.Message);
+            throw new(e.Message);
         }
     }
     public async Task InsertAllAsync(IEnumerable<TEntity> entity, bool runInTransaction = true)
@@ -34,7 +36,8 @@ public class SQLiteRepository<TEntity> : IRepository<TEntity> where TEntity : IB
         }
         catch (Exception e)
         {
-            await BasePageModel.ErrorAlert("Error", e.Message);
+            Debug.WriteLine(e.Message);
+            throw new(e.Message);
         }
     }
 
@@ -46,7 +49,8 @@ public class SQLiteRepository<TEntity> : IRepository<TEntity> where TEntity : IB
         }
         catch (Exception e)
         {
-            await BasePageModel.ErrorAlert("Error", e.Message);
+            Debug.WriteLine(e.Message);
+            throw new(e.Message);
         }
 
     }
@@ -78,8 +82,8 @@ public class SQLiteRepository<TEntity> : IRepository<TEntity> where TEntity : IB
         }
         catch (Exception e)
         {
-            await BasePageModel.ErrorAlert("Error", e.Message);
-            return new List<TEntity>();
+            Debug.WriteLine(e.Message);
+            throw new(e.Message);
         }
     }
 
@@ -93,8 +97,8 @@ public class SQLiteRepository<TEntity> : IRepository<TEntity> where TEntity : IB
         }
         catch (Exception e)
         {
-            await BasePageModel.ErrorAlert("Error", e.Message);
-            return new List<TEntity>();
+            Debug.WriteLine(e.Message);
+            throw new(e.Message);
         }
     }
 
@@ -106,8 +110,8 @@ public class SQLiteRepository<TEntity> : IRepository<TEntity> where TEntity : IB
         }
         catch (Exception e)
         {
-            await BasePageModel.ErrorAlert("Error", e.Message);
-            return new();
+            Debug.WriteLine(e.Message);
+            throw new(e.Message);
         }
     }
     #endregion
@@ -121,7 +125,8 @@ public class SQLiteRepository<TEntity> : IRepository<TEntity> where TEntity : IB
         }
         catch (Exception e)
         {
-            await BasePageModel.ErrorAlert("Error", e.Message);
+            Debug.WriteLine(e.Message);
+            throw new(e.Message);
         }
     }
     public async Task UpdateAllAsync(IEnumerable<TEntity> entity, bool runInTransaction = true)
@@ -133,7 +138,8 @@ public class SQLiteRepository<TEntity> : IRepository<TEntity> where TEntity : IB
         }
         catch (Exception e)
         {
-            await BasePageModel.ErrorAlert("Error", e.Message);
+            Debug.WriteLine(e.Message);
+            throw new(e.Message);
         }
     }
     #endregion
@@ -154,7 +160,8 @@ public class SQLiteRepository<TEntity> : IRepository<TEntity> where TEntity : IB
         }
         catch (Exception e)
         {
-            await BasePageModel.ErrorAlert("Error", e.Message);
+            Debug.WriteLine(e.Message);
+            throw new(e.Message);
         }
     }
 
@@ -167,7 +174,8 @@ public class SQLiteRepository<TEntity> : IRepository<TEntity> where TEntity : IB
         }
         catch (Exception e)
         {
-            await BasePageModel.ErrorAlert("Error", e.Message);
+            Debug.WriteLine(e.Message);
+            throw new(e.Message);
         }
     }
 
@@ -179,7 +187,8 @@ public class SQLiteRepository<TEntity> : IRepository<TEntity> where TEntity : IB
         }
         catch (Exception e)
         {
-            await BasePageModel.ErrorAlert("Error", e.Message);
+            Debug.WriteLine(e.Message);
+            throw new(e.Message);
         }
     }
     #endregion
@@ -193,8 +202,8 @@ public class SQLiteRepository<TEntity> : IRepository<TEntity> where TEntity : IB
         }
         catch (Exception e)
         {
-            await BasePageModel.ErrorAlert("Error", e.Message);
-            return -1;
+            Debug.WriteLine(e.Message);
+            throw new(e.Message);
         }
     }
 
@@ -208,6 +217,21 @@ public class SQLiteRepository<TEntity> : IRepository<TEntity> where TEntity : IB
         {
             await BasePageModel.ErrorAlert("Error", e.Message);
             return new List<TEntity>();
+        }
+    }
+
+    public async Task<IReadOnlyList<TResult>> QueryAsync<TResult>(
+    string sql, params object[] args) where TResult : class, new()
+    {
+        try
+        {
+            var rows = await connection.QueryAsync<TResult>(sql, args);
+            return rows; // IReadOnlyList<TEntity>
+        }
+        catch (Exception e)
+        {
+            Debug.WriteLine(e.Message);
+            throw new(e.Message);
         }
     }
 

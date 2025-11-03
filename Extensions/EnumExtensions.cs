@@ -6,6 +6,7 @@ public static class EnumExtensions
     {
         return keyString switch
         {
+            #region Major Keys
             Key.C => "C",
             Key.C_Sharp => "C#",
             Key.C_Double_Sharp => "C##",
@@ -41,8 +42,53 @@ public static class EnumExtensions
             Key.B_Double_Sharp => "B##",
             Key.B_Flat => "Bb",
             Key.B_Double_Flat => "Bbb",
-            Key.NA => "N/A",
-            _ => "Unknown"
+            #endregion
+            
+            #region Minor Keys
+            Key.C_Minor => "Cm",
+            Key.C_Sharp_Minor => "C#m",
+            Key.C_Double_Sharp_Minor => "C##m",
+            Key.C_Flat_Minor => "Cbm",
+            Key.C_Double_Flat_Minor => "Cbbm",
+
+            Key.D_Minor => "Dm",
+            Key.D_Sharp_Minor => "D#m",
+            Key.D_Double_Sharp_Minor => "D##m",
+            Key.D_Flat_Minor => "Dbm",
+            Key.D_Double_Flat_Minor => "Dbbm",
+
+            Key.E_Minor => "Em",
+            Key.E_Sharp_Minor => "E#m",
+            Key.E_Double_Sharp_Minor => "E##m",
+            Key.E_Flat_Minor => "Ebm",
+            Key.E_Double_Flat_Minor => "Ebbm",
+
+            Key.F_Minor => "Fm",
+            Key.F_Sharp_Minor => "F#m",
+            Key.F_Double_Sharp_Minor => "F##m",
+            Key.F_Flat_Minor => "Fbm",
+            Key.F_Double_Flat_Minor => "Fbbm",
+
+            Key.G_Minor => "Gm",
+            Key.G_Sharp_Minor => "G#m",
+            Key.G_Double_Sharp_Minor => "G##m",
+            Key.G_Flat_Minor => "Gbm",
+            Key.G_Double_Flat_Minor => "Gbbm",
+
+            Key.A_Minor => "Am",
+            Key.A_Sharp_Minor => "A#m",
+            Key.A_Double_Sharp_Minor => "A##m",
+            Key.A_Flat_Minor => "Abm",
+            Key.A_Double_Flat_Minor => "Abb m",
+
+            Key.B_Minor => "Bm",
+            Key.B_Sharp_Minor => "B#m",
+            Key.B_Double_Sharp_Minor => "B##m",
+            Key.B_Flat_Minor => "Bbm",
+            Key.B_Double_Flat_Minor => "Bbbm",
+            #endregion
+
+            _ => Key.NA.ToString(),
 
         };
     }

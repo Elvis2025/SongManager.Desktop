@@ -87,6 +87,15 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Controls\SearchablePicker.xaml.cs">
+	    <DependentUpon>SearchablePicker.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Modals\SelectKeyModalPage.xaml.cs">
+	    <DependentUpon>SelectKeyModalPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Modals\SelectSingersModalPage.xaml.cs">
+	    <DependentUpon>SelectSingersModalPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Pages\Songs\SongsPage.xaml.cs">
 	    <DependentUpon>SongsPage.xaml</DependentUpon>
 	  </Compile>
@@ -108,7 +117,16 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Controls\SearchablePicker.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Controls\SongManagerFeaturePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Modals\SelectKeyModalPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Modals\SelectSingersModalPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Singers\CreateSingersPage.xaml">

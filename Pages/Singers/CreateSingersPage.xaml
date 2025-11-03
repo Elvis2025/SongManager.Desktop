@@ -21,7 +21,7 @@
                 <Grid RowDefinitions="*,*,*">
 
                     <Grid RowDefinitions="Auto,Auto">
-                        <Label Text="{Static icon:FluentUI.arrow_left_16_regular}"
+                        <Label Text="{Static icon:FluentUI.Ic_fluent_arrow_left_16_regular}"
                            FontFamily="{Static icon:FluentUI.FontFamily}"
                            FontSize="26"
                            Padding="26"
@@ -40,7 +40,7 @@
                            Grid.Row="0"
                            HorizontalOptions="Center"/>
 
-                        <Label Text="{Static icon:FluentUI.checkmark_24_regular}"
+                        <Label Text="{Static icon:FluentUI.Ic_fluent_checkmark_24_regular}"
                            FontFamily="{Static icon:FluentUI.FontFamily}"
                            FontSize="26"
                            Padding="26"

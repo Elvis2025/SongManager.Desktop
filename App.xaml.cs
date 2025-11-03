@@ -1,4 +1,6 @@
-﻿namespace SongManager.Desktop
+﻿using Microsoft.Maui.Controls.PlatformConfiguration;
+
+namespace SongManager.Desktop
 {
     public partial class App : Application
     {
@@ -8,8 +10,16 @@
         }
 
         protected override Window CreateWindow(IActivationState? activationState)
-        {
-            return new Window(new AppShell());
+        {   var window = new Window(new AppShell());
+
+#if WINDOWS
+            window.Width = 1084;
+            window.Height = 768;
+
+            window.MinimumWidth = 1084;
+            window.MinimumHeight = 768;
+#endif
+            return window;
         }
     }
 }

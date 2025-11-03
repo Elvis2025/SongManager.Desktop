@@ -1,4 +1,5 @@
 ﻿
+using System.Runtime.InteropServices;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace SongManager.Desktop.Models;
@@ -12,4 +13,7 @@ public abstract class BaseEntity<TPrimaryKey> : IBaseEntity
     public DateTime? DeletionTime { get; set; }
     public bool IsActive { get; set; }
     public bool IsDeleted { get; set; }
+    public int? CreatorUserId { get ; set; }
+    [Unique, NotNull]
+    public Guid? Guid { get; set; }
 }

@@ -20,7 +20,7 @@ public abstract partial class BasePageModel : ObservableObject
     [ObservableProperty]
     private bool isGenderSelected = false;
 
-
+    public Action? GoModalBack;
     public void GenderSelected()
     {
         if (CurrentGender is null || CurrentGender.Gender == Gender.None) return;
@@ -109,6 +109,20 @@ public abstract partial class BasePageModel : ObservableObject
     }
 
     [RelayCommand]
+    public async Task GoModalBackAction()
+    {
+        try
+        {
+            GoModalBack?.Invoke();
+        }
+        catch (Exception e)
+        {
+            Debug.WriteLine(e.Message);
+            await Shell.Current.DisplayAlert("Song Manager Error", e.Message, SongManagerResources.Ok);
+        }
+    }
+
+    [RelayCommand]
     public async Task GoBack()
     {
         try
@@ -176,4 +190,11 @@ public abstract partial class BasePageModel : ObservableObject
       page is null
           ? Task.FromException(new ArgumentNullException(nameof(page)))
           : MainThread.InvokeOnMainThreadAsync(() => Nav.PushAsync(page));
+
+    public static Task PushModalAsync(Page page) =>
+      page is null
+          ? Task.FromException(new ArgumentNullException(nameof(page)))
+          : MainThread.InvokeOnMainThreadAsync(() => Nav.PushModalAsync(page));
+
+
 }

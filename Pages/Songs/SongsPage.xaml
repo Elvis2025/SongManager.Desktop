@@ -12,8 +12,7 @@
                        Title=""
                        >
     <Grid Padding="10,0,10,10"
-          RowDefinitions="Auto,*,Auto"
-          
+          RowDefinitions="Auto,Auto,*,Auto"
           >
         <Label Text="Listado de canciones"
                FontAttributes="Bold"
@@ -23,14 +22,71 @@
                Margin="0,0,0,20"
                Grid.Row="0"
                TextColor="{AppThemeBinding Dark={StaticResource LightBackground},Light={StaticResource Gray600}}"
-     />
+                />
 
+        <HorizontalStackLayout Grid.Row="1" Margin="20,0,0,18" Spacing="20">
+            <Border HeightRequest="50"
+                    Padding="0"
+                    WidthRequest="372"
+                    >
+                <HorizontalStackLayout Margin="10,0,0,0" 
+                                       Spacing="10">
+                    <Label Text="Cantante"
+                           VerticalOptions="Center"
+                           VerticalTextAlignment="Center"
+                           FontAttributes="Bold"
+                           Margin="6,0,0,6"
+                           FontSize="20"
+                           
+                           />
+                    <Picker ItemsSource="{Binding Singers}"
+                            ItemDisplayBinding="{Binding FullName}"
+                            TextColor="{StaticResource Gray300}"
+                            FontAttributes="Bold"
+                            FontSize="18"
+                            VerticalOptions="Center"
+                            HorizontalOptions="Fill"
+                            HeightRequest="60"
+                            WidthRequest="260"
+                            SelectedIndexChanged="FilterSongsBySinger"
+                            x:Name="pkSingers"
+                            />
+                </HorizontalStackLayout>
+            </Border>
+            
+            <Border HeightRequest="50"
+                    Padding="0"
+                    WidthRequest="372"
+                    >
+                <HorizontalStackLayout Margin="10,0,0,0" 
+                                       Spacing="10">
+                    <Label Text="Canción"
+                           VerticalOptions="Center"
+                           VerticalTextAlignment="Center"
+                           FontAttributes="Bold"
+                           Margin="6,0,0,6"
+                           FontSize="20"
+                           />
+                    <Entry  x:Name="txtSong"
+                            TextColor="{StaticResource Gray300}"
+                            FontAttributes="Bold"
+                            FontSize="18"
+                            VerticalOptions="Center"
+                            HorizontalOptions="Fill"
+                            HeightRequest="60"
+                            WidthRequest="270"
+                            ClearButtonVisibility="WhileEditing"
+                            TextChanged="FilterSongsBySong"
+                            />
+                </HorizontalStackLayout>
+            </Border>
+            
+        </HorizontalStackLayout>
 
-
-        <Border Padding="0" Grid.Row="1" Margin="160,0,160,0">
+        <Border Padding="0" Grid.Row="2" Margin="20,0,20,0">
             <Grid RowDefinitions="Auto,*" BackgroundColor="White"
               >
-
+                
                 <Grid ColumnDefinitions="3*,4*,3*,2.5*"
                       Padding="0,5"
                       ColumnSpacing="15"
@@ -42,7 +98,7 @@
                            FontAttributes="Bold"
                            TextColor="{AppThemeBinding Dark={StaticResource LightBackground}, Light={StaticResource Gray600}}"
                            />
-                    <Label Text="Nombre de la canción" 
+                    <Label Text="Canción" 
                            FontAttributes="Bold" 
                            Grid.Column="1" 
                            TextColor="{AppThemeBinding Dark={StaticResource LightBackground}, Light={StaticResource Gray600}}"/>
@@ -60,76 +116,115 @@
                 </Grid>
 
                 <ScrollView Grid.Row="1">
-                    <CollectionView ItemsSource="{Binding SongsList}">
+                    <CollectionView ItemsSource="{Binding Songs}">
                     
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                                <Grid ColumnDefinitions="3*,4*,3*,2.5*" 
-                            Padding="0,5"
-                            BackgroundColor="{Binding HexColor}"
-                          
-                            ColumnSpacing="15"
-                            >
-                                <Label Text="{Binding Singer}" 
-                                Grid.Column="0"
-                                FontAttributes="Bold"
-                               Margin="18,0,0,0"
-                                TextColor="{AppThemeBinding Dark={StaticResource Gray400}, Light={StaticResource Gray400}}"
-                                />
+                                <Grid ColumnDefinitions="3*,4*,3*,2.5*"
+                                      RowDefinitions="Auto,Auto"
+                                      Padding="0,10"
+                                      BackgroundColor="{Binding HexColor}"
+                                      ColumnSpacing="15"
+                                      RowSpacing="5"
+                                      >
+                                    
+                                    <Label Text="{Binding SingerName}" 
+                                       Grid.Column="0"
+                                       FontAttributes="Bold"
+                                       Margin="18,0,0,0"
+                                       TextColor="{AppThemeBinding Dark={StaticResource Gray400}, Light={StaticResource Gray400}}"/>
 
-                                <Label Text="{Binding SongName}" 
-                                TextColor="{AppThemeBinding Dark={StaticResource Gray400}, Light={StaticResource Gray400}}"
-                                FontAttributes="Bold"
-                                Grid.Column="1"
-                                />
+                                    <Label Text="{Binding SongName}" 
+                                       TextColor="{AppThemeBinding Dark={StaticResource Gray400}, Light={StaticResource Gray400}}"
+                                       FontAttributes="Bold"
+                                       Grid.Column="1"/>
 
+                                    <Label Text="{Binding SongAuthor}" 
+                                       Grid.Column="2"
+                                       TextColor="{AppThemeBinding Dark={StaticResource Gray400}, Light={StaticResource Gray400}}"
+                                       FontAttributes="Bold"
+                                       HorizontalOptions="Start"/>
 
-                                <Label Text="{Binding SongAuthor}" 
-                                Grid.Column="2"
-                                TextColor="{AppThemeBinding Dark={StaticResource Gray400}, Light={StaticResource Gray400}}"
-                                FontAttributes="Bold"
-                                        HorizontalOptions="Start"
-                                />
+                                    <Label Text="{Binding Key}" 
+                                           Grid.Column="3"
+                                           FontAttributes="Bold"
+                                           TextColor="{AppThemeBinding Dark={StaticResource Gray400}, Light={StaticResource Gray400}}"
+                                           HorizontalOptions="Start"
+                                           Margin="15,0,0,0"/>
 
-                                <Label Text="{Binding KeySignatureValue}" 
-                                Grid.Column="3"
-                                FontAttributes="Bold"
-                                TextColor="{AppThemeBinding Dark={StaticResource Gray400}, Light={StaticResource Gray400}}"
-                                HorizontalOptions="Start"
-                                       Margin="15,0,0,0"
-                                />
-                                    <Label Text="{Static icon:FluentUI.delete_48_regular}"
-                                            FontFamily="{Static icon:FluentUI.FontFamily}"
+                                    <Label Text="{Static icon:FluentUI.Ic_fluent_edit_48_regular}"
+                                           FontFamily="{Static icon:FluentUI.FontFamily}"
                                            HorizontalOptions="End"
                                            VerticalOptions="Center"
-                                            FontAttributes="Bold"
+                                           FontAttributes="Bold"
                                            FontSize="22"
                                            Margin="4,0,12,0"
-                                           Grid.Column="3"
-                                           TextColor="PaleVioletRed"
-                                            >
-                                        <Label.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.DeleteSongCommand}"
-                                  CommandParameter="{Binding .}"
-                                  />
-                                        </Label.GestureRecognizers>
-                                    </Label>
-                                    <Label Text="{Static icon:FluentUI.edit_48_regular}"
-                                            FontFamily="{Static icon:FluentUI.FontFamily}"
-                                         HorizontalOptions="End"
-                                           VerticalOptions="Center"
-                                            FontAttributes="Bold"
-                                           FontSize="22"
-                                           Margin="14,0,46,1"
                                            Grid.Column="3"
                                            TextColor="DarkSlateBlue"
                                             >
                                         <Label.GestureRecognizers>
                                             <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.EditSongCommand}"
-                                  CommandParameter="{Binding .}"
-                                  />
+                                                                  CommandParameter="{Binding .}"/>
                                         </Label.GestureRecognizers>
                                     </Label>
+
+                                    <Label Text="{Static icon:FluentUI.Ic_fluent_delete_48_regular}"
+                                           FontFamily="{Static icon:FluentUI.FontFamily}"
+                                           HorizontalOptions="End"
+                                           VerticalOptions="Center"
+                                           FontAttributes="Bold"
+                                           FontSize="22"
+                                           Margin="4,0,12,0"
+                                           Grid.Column="3"
+                                           Grid.Row="1"
+                                           TextColor="PaleVioletRed">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.DeleteSongCommand}"
+                                                                  CommandParameter="{Binding .}"/>
+                                        </Label.GestureRecognizers>
+                                    </Label>
+                                    
+
+                                    <!--<HorizontalStackLayout Grid.Row="1"
+                                                           Grid.Column="1"
+                                                           Grid.ColumnSpan="4"
+                                                           Spacing="10"
+                                                           >
+
+                                        <Label Text="Comentario:"
+                                               FontAttributes="Bold"
+                                               TextColor="{StaticResource Gray400}"
+                                               />
+                                        
+                                        <Label Text="{Binding Comment}"
+                                               />
+                                        
+                                    </HorizontalStackLayout>-->
+                                    <Border Grid.Row="1"
+                                            Grid.Column="0"
+                                            Grid.ColumnSpan="4"
+                                            Padding="20,0,20,0"
+                                            Margin="8,0,0,0"
+                                            HorizontalOptions="Start"
+                                            Background="LightSalmon"
+                                            HeightRequest="35"
+                                            >
+
+                                        <Label Grid.Row="1"
+                                               Grid.ColumnSpan="4"
+                                               Text="Ver en youtube"
+                                               TextDecorations="Underline"
+                                               TextColor="DarkBlue"
+                                               FontAttributes="Bold"
+                                               VerticalOptions="Center"
+                                           />
+                                        <Border.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.OpenLinkSongCommand}"
+                                                                  CommandParameter="{Binding Link}"
+                                                                  />
+
+                                        </Border.GestureRecognizers>
+                                    </Border>
                                 </Grid>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
@@ -143,10 +238,10 @@
           StrokeShape="RoundRectangle 100"
           Padding="9.5,9.5,6,-3"
           Margin="0,30,30,30"
-          Grid.Row="2"
+          Grid.Row="3"
           >
 
-            <Label Text="{Static icon:FluentUI.add_12_regular}"
+            <Label Text="{Static icon:FluentUI.Ic_fluent_add_12_regular}"
              FontFamily="{Static icon:FluentUI.FontFamily}"
              VerticalOptions="Center"
              FontAttributes="Bold"
@@ -160,5 +255,30 @@
                 <TapGestureRecognizer Command="{Binding  CreateSongCommand}"/>
             </Border.GestureRecognizers>
         </Border>
+
+        <Border HorizontalOptions="End"
+          VerticalOptions="End"
+          StrokeShape="RoundRectangle 100"
+          Padding="13.5,12.5,11,-1"
+          Margin="0,0,100,30"
+          Grid.Row="3"
+          >
+
+            <Label Text="{Static icon:FluentUI.Ic_fluent_arrow_sync_12_regular}"
+             FontFamily="{Static icon:FluentUI.FontFamily}"
+             VerticalOptions="Center"
+             FontAttributes="Bold"
+             FontSize="38"
+             HorizontalTextAlignment="Center"
+             VerticalTextAlignment="Center"
+             Margin="-4,-4,0,0"
+             Padding="0"
+             HorizontalOptions="Center"/>
+            <Border.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding  RefreshCommand}"/>
+            </Border.GestureRecognizers>
+        </Border>
+        
+        
     </Grid>
 </pages:BaseContentPage>

@@ -17,6 +17,7 @@ public interface IRepository<TEntity> where TEntity : IBaseEntity, new()
     Task InsertOrReplaceAllAsync(IEnumerable<TEntity> entity, bool runInTransaction = true);
     Task InsertOrReplaceAsync(TEntity entity);
     Task<IEnumerable<TEntity>> QueryAsync(string query, params object[] args);
+    Task<IReadOnlyList<TResult>> QueryAsync<TResult>(string sql, params object[] args) where TResult : class, new();
     Task UpdateAllAsync(IEnumerable<TEntity> entity, bool runInTransaction = true);
     Task UpdateAsync(TEntity entity);
 }

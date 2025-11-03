@@ -2,7 +2,8 @@
 
 public sealed record class KeyDto : BaseDto<byte>
 {
-    public string Name { get; set; } = string.Empty;
+    public string Name => Key.GetKeyName();
     public Key Key { get; set; } = Key.NA;
+    public bool IsSelected { get; set; }
 
 }
