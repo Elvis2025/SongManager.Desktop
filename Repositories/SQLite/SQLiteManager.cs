@@ -27,7 +27,7 @@ public class SQLiteManager : ISQLiteManager
 
         var modelTypes = allTypes.Where(t => t.IsClass &&
                                              t.Namespace is not null &&
-                                             t.Namespace == "Model" &&
+                                             t.Namespace == "Models" &&
                                              t.GetCustomAttribute<SQLiteEntityAttribute>() is not null);
 
         foreach (var type in modelTypes)

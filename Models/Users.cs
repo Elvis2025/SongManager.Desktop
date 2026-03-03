@@ -1,9 +1,4 @@
-﻿using SongManager.Desktop.Attributes;
-using SongManager.Desktop.DTOs;
-using SongManager.Desktop.Extensions;
-using SQLite;
-
-namespace SongManager.Desktop.Models;
+﻿namespace SongManager.Desktop.Models;
 [SQLiteEntity]
 public class Users : BaseEntity<int>
 {
