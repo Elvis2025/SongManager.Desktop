@@ -4,15 +4,52 @@
                        x:Class="SongManager.Desktop.Pages.Users.UserPage"
                        xmlns:pages="clr-namespace:SongManager.Desktop.Pages"
                        xmlns:pageModel="clr-namespace:SongManager.Desktop.PageModels"
-                       xmlns:resources="clr-namespace:SongManager.Desktop.Resx"
-                       xmlns:icon="clr-namespace:SongManager.Desktop.UsesCases.IconFont"
-                       xmlns:controls="clr-namespace:SongManager.Desktop.Pages"
-                       xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-                       x:TypeArguments="pageModel:UserPageModel">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+                       x:TypeArguments="pageModel:UserPageModel"
+                       Background="{StaticResource PageBackgroundGradient}">
+
+    <Grid x:Name="PageRoot" Padding="22" RowDefinitions="Auto,Auto,*" RowSpacing="16">
+        <Label Text="♬"
+               Style="{StaticResource WatermarkLabel}"
+               HorizontalOptions="End"
+               VerticalOptions="Start"
+               Margin="0,-25,-8,0" />
+
+        <Border Style="{StaticResource ModernCard}">
+            <VerticalStackLayout Spacing="4">
+                <Label Text="Usuarios" Style="{StaticResource HeroTitle}" />
+                <Label Text="Centro de cuentas y permisos del sistema SongManager."
+                       Style="{StaticResource HeroSubtitle}" />
+            </VerticalStackLayout>
+        </Border>
+
+        <Grid Grid.Row="1" ColumnDefinitions="*,*" ColumnSpacing="12">
+            <Border Style="{StaticResource ModernCard}">
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="Seguridad" FontAttributes="Bold" FontSize="16" />
+                    <Label Text="Próximamente: roles, políticas de acceso y auditoría avanzada."
+                           TextColor="{AppThemeBinding Light=#5A627D, Dark=#B7BFDA}" />
+                </VerticalStackLayout>
+            </Border>
+            <Border Grid.Column="1" Style="{StaticResource ModernCard}">
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="Estado del módulo" FontAttributes="Bold" FontSize="16" />
+                    <Label Text="Interfaz modernizada y preparada para integración de CRUD de usuarios."
+                           TextColor="{AppThemeBinding Light=#5A627D, Dark=#B7BFDA}" />
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
+
+        <Border Grid.Row="2" Style="{StaticResource ModernCard}">
+            <VerticalStackLayout Spacing="10" VerticalOptions="Center" HorizontalOptions="Center">
+                <Label Text="👤" FontSize="48" HorizontalTextAlignment="Center" />
+                <Label Text="Módulo listo para expansión"
+                       FontAttributes="Bold"
+                       FontSize="20"
+                       HorizontalTextAlignment="Center" />
+                <Label Text="Conecta tu repositorio de usuarios para habilitar administración completa."
+                       HorizontalTextAlignment="Center"
+                       TextColor="{AppThemeBinding Light=#5A627D, Dark=#B7BFDA}" />
+            </VerticalStackLayout>
+        </Border>
+    </Grid>
 </pages:BaseContentPage>

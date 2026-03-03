@@ -4,176 +4,70 @@
                        x:Class="SongManager.Desktop.Pages.Singers.SingersPage"
                        xmlns:pages="clr-namespace:SongManager.Desktop.Pages"
                        xmlns:pageModel="clr-namespace:SongManager.Desktop.PageModels"
-                       xmlns:resources="clr-namespace:SongManager.Desktop.Resx"
-                       xmlns:icon="clr-namespace:SongManager.Desktop.UsesCases.IconFont"
-                       xmlns:controls="clr-namespace:SongManager.Desktop.Pages"
-                       xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
                        x:TypeArguments="pageModel:SingersPageModel"
-                       Title=""
-                       >
-    <Grid Padding="10,0,10,10"
-          RowDefinitions="Auto,*,Auto"
-          >
-        <Label Text="Cantantes"
-               FontAttributes="Bold"
-               FontSize="36"
-               HorizontalOptions="Center"
-               VerticalOptions="Center"
-               Margin="0,0,0,20"
-               Grid.Row="0"
-               TextColor="{AppThemeBinding Dark={StaticResource LightBackground},Light={StaticResource Gray600}}"
-            />
-        <Border Padding="0"
-                Grid.Row="1"
-                Margin="160,0,160,0">
-            <Grid RowDefinitions="Auto,*"
-                  BackgroundColor="White">
+                       Background="{StaticResource PageBackgroundGradient}">
 
-                <Grid ColumnDefinitions="0.4*,0.7*,1*"
-                       Padding="5"
-                       ColumnSpacing="20"
-                       Grid.Row="0"
-                       BackgroundColor="{AppThemeBinding Dark={StaticResource Gray600}, Light={StaticResource Gray300}}">
-                    <Label Text="Codigo" 
-                           Grid.Column="0" 
-                           Margin="18,0,0,0"
-                           FontAttributes="Bold"
-                           TextColor="{AppThemeBinding Dark={StaticResource LightBackground}, Light={StaticResource Gray600}}"
-                           />
-                    <Label Text="Nombre" 
-                           FontAttributes="Bold" 
-                           Grid.Column="1" 
-                           TextColor="{AppThemeBinding Dark={StaticResource LightBackground}, Light={StaticResource Gray600}}"/>
+    <Grid x:Name="PageRoot" RowDefinitions="Auto,*" Padding="22" RowSpacing="16">
+        <Label Text="♫"
+               Style="{StaticResource WatermarkLabel}"
+               HorizontalOptions="End"
+               VerticalOptions="Start"
+               Margin="0,-22,-8,0" />
 
-                    <Label Text="Rango Vocal"
-                           Grid.Column="2" 
-                           FontAttributes="Bold"
-                           TextColor="{AppThemeBinding Dark={StaticResource LightBackground}, Light={StaticResource Gray600}}"
-                           />
-                    
-                    <!--<Label Text="Eliminar"
-                           Grid.Column="3" 
-                           FontAttributes="Bold"
-                           TextColor="{AppThemeBinding Dark={StaticResource LightBackground}, Light={StaticResource Gray600}}"
-                           />-->
-                    
-                </Grid>
-
-                <ScrollView Grid.Row="1">
-                    <CollectionView ItemsSource="{Binding SingersDto}"
-                                Grid.Row="1"
-                                BackgroundColor="White"
-                                    VerticalOptions="Start"
-                                    SelectedItem="{Binding CurrentSingerDto}"
-                                >
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                                <Grid ColumnDefinitions="0.4*,0.7*,1*" 
-                                 Padding="5" 
-                                 ColumnSpacing="20"
-                                  BackgroundColor="{Binding HexColor}"
-                                 >
-                                <Label Text="{Binding Code}" 
-                                 Grid.Column="0"
-                                 FontAttributes="Bold"
-                                Margin="18,0,0,0"
-                                 TextColor="{AppThemeBinding Dark={StaticResource Gray400}, Light={StaticResource Gray400}}"
-                                 />
-
-                                <Label Text="{Binding FullName}" 
-                                 TextColor="{AppThemeBinding Dark={StaticResource Gray400}, Light={StaticResource Gray400}}"
-                                 FontAttributes="Bold"
-                                 Grid.Column="1"
-                                 />
-                                
-                                <Label Text="{Binding VocalRange}" 
-                                     Grid.Column="2"
-                                     FontAttributes="Bold"
-                                     TextColor="{AppThemeBinding Dark={StaticResource Gray400}, Light={StaticResource Gray400}}"
-                                     HorizontalOptions="Start"
-                                     />
-                                    <Label Text="{Static icon:FluentUI.Ic_fluent_delete_48_regular}"
-                                        FontFamily="{Static icon:FluentUI.FontFamily}"
-                                       HorizontalOptions="End"
-                                       VerticalOptions="Center"
-                                        FontAttributes="Bold"
-                                       FontSize="22"
-                                       Margin="20,0,22,0"
-                                       Grid.Column="3"
-                                       TextColor="PaleVioletRed"
-                                        >
-                                    <Label.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.DeleteSingerCommand}"
-                                                                  CommandParameter="{Binding .}"
-                                                                  />
-                                    </Label.GestureRecognizers>
-                                </Label>
-                                    <Label Text="{Static icon:FluentUI.Ic_fluent_edit_48_regular}"
-                                        FontFamily="{Static icon:FluentUI.FontFamily}"
-                                     HorizontalOptions="End"
-                                       VerticalOptions="Center"
-                                        FontAttributes="Bold"
-                                       FontSize="22"
-                                       Margin="20,0,62,1"
-                                       Grid.Column="3"
-                                       TextColor="DarkSlateBlue"
-                                        >
-                                    <Label.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.EditSingerCommand}"
-                                                                  CommandParameter="{Binding .}"
-                                                                  />
-                                    </Label.GestureRecognizers>
-                                </Label>
-
-                                </Grid>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-                </ScrollView>
+        <Border Style="{StaticResource ModernCard}">
+            <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto" RowSpacing="4">
+                <Label Text="Gestión de Cantantes" Style="{StaticResource HeroTitle}" />
+                <Label Grid.Row="1"
+                       Text="Crea fichas vocales, edita perfiles y mantén tu equipo organizado."
+                       Style="{StaticResource HeroSubtitle}" />
+                <Button Grid.Column="1"
+                        Grid.RowSpan="2"
+                        VerticalOptions="Center"
+                        Text="Nuevo"
+                        Style="{StaticResource PrimaryActionButton}"
+                        Command="{Binding CreateSingerCommand}" />
             </Grid>
         </Border>
 
-        <Border HorizontalOptions="End"
-                VerticalOptions="End"
-                StrokeShape="RoundRectangle 100"
-                Padding="9.5,9.5,6,-3"
-                Margin="0,30,30,30"
-                Grid.Row="2"
-                >
+        <CollectionView Grid.Row="1" ItemsSource="{Binding SingersDto}" SelectionMode="None">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border Style="{StaticResource ModernCard}" Margin="0,0,0,12">
+                        <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto" RowSpacing="6">
+                            <Label Text="{Binding FullNameComplete}" FontSize="18" FontAttributes="Bold" />
+                            <Border Grid.Column="1" Style="{StaticResource SoftChip}">
+                                <Label Text="{Binding Code}" FontSize="11" FontAttributes="Bold"/>
+                            </Border>
 
-            <Label Text="{Static icon:FluentUI.Ic_fluent_add_12_regular}"
-                   FontFamily="{Static icon:FluentUI.FontFamily}"
-                   VerticalOptions="Center"
-                   FontAttributes="Bold"
-                   FontSize="38"
-                   HorizontalTextAlignment="Center"
-                   VerticalTextAlignment="Center"
-                   Margin="0,0,0,0"
-                   Padding="0"
-                   HorizontalOptions="Center"/>
-            <Border.GestureRecognizers>
-                <TapGestureRecognizer Command="{Binding  CreateSingerCommand}"/>
-            </Border.GestureRecognizers>
-            <VisualStateManager.VisualStateGroups>
-                <VisualStateGroup Name="CommonStates">
-                    <VisualState Name="Normal">
-                        <VisualState.Setters>
-                            <Setter Property="BackgroundColor" Value="LightGray" />
-                        </VisualState.Setters>
-                    </VisualState>
-                    <VisualState Name="PointerOver">
-                        <VisualState.Setters>
-                            <Setter Property="BackgroundColor" Value="LightBlue" />
-                        </VisualState.Setters>
-                    </VisualState>
-                    <VisualState Name="Pressed">
-                        <VisualState.Setters>
-                            <Setter Property="BackgroundColor" Value="SteelBlue" />
-                        </VisualState.Setters>
-                    </VisualState>
-                </VisualStateGroup>
-            </VisualStateManager.VisualStateGroups>
-        </Border>
-       
+                            <HorizontalStackLayout Grid.Row="1" Spacing="8">
+                                <Border Style="{StaticResource SoftChip}">
+                                    <Label Text="{Binding Gender}" FontSize="12" />
+                                </Border>
+                                <Border Style="{StaticResource SoftChip}">
+                                    <Label Text="{Binding VocalRange}" FontSize="12" />
+                                </Border>
+                            </HorizontalStackLayout>
+
+                            <HorizontalStackLayout Grid.Row="1" Grid.Column="1" Spacing="8">
+                                <Button Text="Editar"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.EditSingerCommand}"
+                                        CommandParameter="{Binding .}" />
+                                <Button Text="Eliminar"
+                                        BackgroundColor="{AppThemeBinding Light=#FEE2E2, Dark=#4B1F2C}"
+                                        TextColor="{AppThemeBinding Light=#B42318, Dark=#FFC0C8}"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.DeleteSingerCommand}"
+                                        CommandParameter="{Binding .}" />
+                            </HorizontalStackLayout>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+            <CollectionView.EmptyView>
+                <Border Style="{StaticResource ModernCard}">
+                    <Label Text="No hay cantantes registrados todavía."
+                           HorizontalTextAlignment="Center" />
+                </Border>
+            </CollectionView.EmptyView>
+        </CollectionView>
     </Grid>
 </pages:BaseContentPage>
