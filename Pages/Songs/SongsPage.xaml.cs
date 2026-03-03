@@ -49,49 +49,32 @@ public partial class SongsPage : BaseContentPage<SongsPageModel>
     private async void GoSingers_Clicked(object sender, EventArgs e) => await Shell.Current.GoToAsync("//SingersPage");
     private async void GoUsers_Clicked(object sender, EventArgs e) => await Shell.Current.GoToAsync("//UserPage");
 
-    private void FilterSongsBySong(object sender, TextChangedEventArgs e)
+    private void SongSearchBar_SearchTextChanged(object sender, TextChangedEventArgs e)
+    {
+        FilterSongs();
+    }
+
+    private void SongSearchBar_SearchRequested(object sender, EventArgs e)
     {
         FilterSongs();
     }
 
     private void FilterSongs()
     {
-        var findSong = txtSong.Text ?? string.Empty;
+        var findSong = SongSearchBar.SearchText ?? string.Empty;
 
-        var findSongBysinger = pkSingers.SelectedItem as SingersDto;
-        var allSongs = (findSongBysinger is null || findSongBysinger.Id == -1) && string.IsNullOrWhiteSpace(findSong);
-
-        if (allSongs)
+        if (string.IsNullOrWhiteSpace(findSong))
         {
             basePageModel.Songs = basePageModel.SongsList!.FormatterSongsRows();
             return;
         }
 
-        if (string.IsNullOrWhiteSpace(findSong) && findSongBysinger!.Id >= 0)
-        {
-            basePageModel.Songs = basePageModel.SongsList?.Where(k => k.SingerId == findSongBysinger.Id)
-                                                                 .OrderBy(x => x.SingerName)
-                                                                 .ToObservableCollection()
-                                                                 .FormatterSongsRows();
-            return;
-        }
-        if (!string.IsNullOrWhiteSpace(findSong) && findSongBysinger!.Id < 0)
-        {
-            basePageModel.Songs = basePageModel.SongsList?.Where(k => k.SongName.Contains(findSong, StringComparison.OrdinalIgnoreCase))
-                                                          .OrderBy(x => x.SingerName)
-                                                          .ToObservableCollection()
-                                                          .FormatterSongsRows();
-            return;
-        }
-
-        basePageModel.Songs = basePageModel.SongsList?.Where(k => k.SongName.Contains(findSong, StringComparison.OrdinalIgnoreCase) && k.SingerId == findSongBysinger.Id)
-                                                      .OrderBy(x => x.SingerName)
-                                                      .ToObservableCollection()
-                                                      .FormatterSongsRows();
-    }
-
-    private void FilterSongsBySinger(object sender, EventArgs e)
-    {
-        FilterSongs();
+        basePageModel.Songs = basePageModel.SongsList?.Where(k =>
+                k.SongName.Contains(findSong, StringComparison.OrdinalIgnoreCase) ||
+                k.SingerName.Contains(findSong, StringComparison.OrdinalIgnoreCase) ||
+                k.SongAuthor.Contains(findSong, StringComparison.OrdinalIgnoreCase))
+            .OrderBy(x => x.SingerName)
+            .ToObservableCollection()
+            .FormatterSongsRows();
     }
 }

@@ -3,6 +3,7 @@
                        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                        x:Class="SongManager.Desktop.Pages.Songs.SongsPage"
                        xmlns:pages="clr-namespace:SongManager.Desktop.Pages"
+                       xmlns:controls="clr-namespace:SongManager.Desktop.Controls"
                        xmlns:pageModel="clr-namespace:SongManager.Desktop.PageModels"
                        x:TypeArguments="pageModel:SongsPageModel"
                        Shell.TabBarIsVisible="False"
@@ -45,17 +46,11 @@
         </Grid>
 
         <Border x:Name="FilterCard" Grid.Row="2" Style="{StaticResource GlassCard}">
-            <Grid ColumnDefinitions="1.4*,*" RowDefinitions="Auto,Auto" ColumnSpacing="8" RowSpacing="8">
-                <Border Grid.ColumnSpan="2" Style="{StaticResource FieldShell}">
-                    <Entry x:Name="txtSong" Placeholder="Buscar canción por nombre..." TextChanged="FilterSongsBySong" ClearButtonVisibility="WhileEditing" BackgroundColor="Transparent" />
-                </Border>
-
-                <Border Grid.Row="1" Style="{StaticResource FieldShell}">
-                    <Picker x:Name="pkSingers" Title="Filtrar por cantante" ItemsSource="{Binding Singers}" ItemDisplayBinding="{Binding FullName}" SelectedIndexChanged="FilterSongsBySinger" />
-                </Border>
-
-                <Button Grid.Row="1" Grid.Column="1" Text="Refrescar" Style="{StaticResource SecondaryActionButton}" Command="{Binding RefreshCommand}" />
-            </Grid>
+            <controls:ModernSearchBar x:Name="SongSearchBar"
+                                      LeftText="Todos"
+                                      Placeholder="Buscar canción por nombre..."
+                                      SearchTextChanged="SongSearchBar_SearchTextChanged"
+                                      SearchRequested="SongSearchBar_SearchRequested" />
         </Border>
 
         <RefreshView Grid.Row="3" Command="{Binding RefreshCommand}">

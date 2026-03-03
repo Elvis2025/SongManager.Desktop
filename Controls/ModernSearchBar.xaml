@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:icon="clr-namespace:SongManager.Desktop.UsesCases.IconFont"
+             x:Class="SongManager.Desktop.Controls.ModernSearchBar"
+             x:Name="Root">
+    <Border BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#1E2745}"
+            Stroke="{AppThemeBinding Light=#5E55FA, Dark=#8D86FF}"
+            StrokeThickness="1.5"
+            StrokeShape="RoundRectangle 50"
+            Padding="0"
+            HeightRequest="42">
+        <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="0">
+            <Label Text="{Binding LeftText, Source={x:Reference Root}}"
+                   TextColor="{AppThemeBinding Light=#5C668D, Dark=#BCC5E7}"
+                   VerticalTextAlignment="Center"
+                   FontAttributes="Bold"
+                   FontSize="13"
+                   Padding="14,0,10,0" />
+
+            <Entry Grid.Column="1"
+                   x:Name="SearchEntry"
+                   Placeholder="{Binding Placeholder, Source={x:Reference Root}}"
+                   Text="{Binding SearchText, Source={x:Reference Root}, Mode=TwoWay}"
+                   BackgroundColor="Transparent"
+                   Margin="0"
+                   ClearButtonVisibility="WhileEditing"
+                   FontSize="14"
+                   TextColor="{AppThemeBinding Light=#2D355A, Dark=#E2E8FF}"
+                   PlaceholderColor="{AppThemeBinding Light=#8791B5, Dark=#8F9BC5}"
+                   TextChanged="SearchEntry_TextChanged" />
+
+            <Border Grid.Column="2"
+                    BackgroundColor="{StaticResource Primary}"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 50"
+                    Padding="18,0"
+                    Margin="0">
+                <Label Text="{x:Static icon:FluentUI.Ic_fluent_search_24_regular}"
+                       FontFamily="{x:Static icon:FluentUI.FontFamily}"
+                       TextColor="White"
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"
+                       FontSize="18"
+                       HeightRequest="40"/>
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="SearchTapped" />
+                </Border.GestureRecognizers>
+            </Border>
+        </Grid>
+    </Border>
+</ContentView>
