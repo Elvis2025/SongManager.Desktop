@@ -7,54 +7,60 @@
                        x:TypeArguments="pageModel:SingersPageModel"
                        Background="{StaticResource PageBackgroundGradient}">
 
-    <Grid x:Name="PageRoot" RowDefinitions="Auto,*" Padding="22" RowSpacing="16">
+    <Grid Padding="24" RowDefinitions="Auto,Auto,*" RowSpacing="14" x:Name="PageRoot">
         <Label Text="♫"
                Style="{StaticResource WatermarkLabel}"
                HorizontalOptions="End"
                VerticalOptions="Start"
-               Margin="0,-22,-8,0" />
+               Margin="0,-40,-24,0" />
 
-        <Border Style="{StaticResource ModernCard}">
-            <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto" RowSpacing="4">
-                <Label Text="Gestión de Cantantes" Style="{StaticResource HeroTitle}" />
+        <Border x:Name="HeroCard" Style="{StaticResource GlassCard}">
+            <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto" RowSpacing="6">
+                <Label Text="Directorio de Cantantes" Style="{StaticResource HeroTitle}" />
                 <Label Grid.Row="1"
-                       Text="Crea fichas vocales, edita perfiles y mantén tu equipo organizado."
+                       Text="Visualiza datos vocales y administra perfiles con claridad."
                        Style="{StaticResource HeroSubtitle}" />
                 <Button Grid.Column="1"
                         Grid.RowSpan="2"
-                        VerticalOptions="Center"
-                        Text="Nuevo"
+                        Text="+ Nuevo"
                         Style="{StaticResource PrimaryActionButton}"
                         Command="{Binding CreateSingerCommand}" />
             </Grid>
         </Border>
 
-        <CollectionView Grid.Row="1" ItemsSource="{Binding SingersDto}" SelectionMode="None">
+        <Border x:Name="StatsCard" Grid.Row="1" Style="{StaticResource GlassCard}">
+            <HorizontalStackLayout Spacing="12">
+                <Border Style="{StaticResource SoftChip}"><Label Text="Total" FontAttributes="Bold" /></Border>
+                <Label Text="{Binding SingersDto.Count}" Style="{StaticResource StatNumber}" />
+                <Label Text="cantantes registrados"
+                       VerticalOptions="Center"
+                       TextColor="{AppThemeBinding Light=#5E678D, Dark=#BCC5E7}" />
+            </HorizontalStackLayout>
+        </Border>
+
+        <CollectionView Grid.Row="2" x:Name="SingersCollection" ItemsSource="{Binding SingersDto}" SelectionMode="None">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Border Style="{StaticResource ModernCard}" Margin="0,0,0,12">
-                        <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto" RowSpacing="6">
+                    <Border Style="{StaticResource GlassCard}" Margin="0,0,0,12">
+                        <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto,Auto" RowSpacing="8">
                             <Label Text="{Binding FullNameComplete}" FontSize="18" FontAttributes="Bold" />
                             <Border Grid.Column="1" Style="{StaticResource SoftChip}">
-                                <Label Text="{Binding Code}" FontSize="11" FontAttributes="Bold"/>
+                                <Label Text="{Binding Code}" FontAttributes="Bold" FontSize="12" />
                             </Border>
 
-                            <HorizontalStackLayout Grid.Row="1" Spacing="8">
-                                <Border Style="{StaticResource SoftChip}">
-                                    <Label Text="{Binding Gender}" FontSize="12" />
-                                </Border>
-                                <Border Style="{StaticResource SoftChip}">
-                                    <Label Text="{Binding VocalRange}" FontSize="12" />
-                                </Border>
+                            <HorizontalStackLayout Grid.Row="1" Grid.ColumnSpan="2" Spacing="8">
+                                <Border Style="{StaticResource SoftChip}"><Label Text="{Binding Gender}" FontSize="12"/></Border>
+                                <Border Style="{StaticResource SoftChip}"><Label Text="{Binding VocalRange}" FontSize="12"/></Border>
                             </HorizontalStackLayout>
 
-                            <HorizontalStackLayout Grid.Row="1" Grid.Column="1" Spacing="8">
+                            <HorizontalStackLayout Grid.Row="2" Grid.ColumnSpan="2" Spacing="8">
                                 <Button Text="Editar"
+                                        Style="{StaticResource SecondaryActionButton}"
                                         Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.EditSingerCommand}"
                                         CommandParameter="{Binding .}" />
                                 <Button Text="Eliminar"
-                                        BackgroundColor="{AppThemeBinding Light=#FEE2E2, Dark=#4B1F2C}"
-                                        TextColor="{AppThemeBinding Light=#B42318, Dark=#FFC0C8}"
+                                        BackgroundColor="{AppThemeBinding Light=#FEE3E3, Dark=#54283A}"
+                                        TextColor="{AppThemeBinding Light=#B42318, Dark=#FFC0CF}"
                                         Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.DeleteSingerCommand}"
                                         CommandParameter="{Binding .}" />
                             </HorizontalStackLayout>
@@ -63,9 +69,12 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
             <CollectionView.EmptyView>
-                <Border Style="{StaticResource ModernCard}">
-                    <Label Text="No hay cantantes registrados todavía."
-                           HorizontalTextAlignment="Center" />
+                <Border Style="{StaticResource GlassCard}">
+                    <VerticalStackLayout HorizontalOptions="Center" Spacing="6">
+                        <Label Text="🎙" FontSize="40" HorizontalTextAlignment="Center" />
+                        <Label Text="Aún no hay cantantes" HorizontalTextAlignment="Center" FontAttributes="Bold" />
+                        <Label Text="Haz clic en “+ Nuevo” para registrar el primer cantante." HorizontalTextAlignment="Center" FontSize="13" />
+                    </VerticalStackLayout>
                 </Border>
             </CollectionView.EmptyView>
         </CollectionView>

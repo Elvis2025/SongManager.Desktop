@@ -7,49 +7,55 @@
                        x:TypeArguments="pageModel:UserPageModel"
                        Background="{StaticResource PageBackgroundGradient}">
 
-    <Grid x:Name="PageRoot" Padding="22" RowDefinitions="Auto,Auto,*" RowSpacing="16">
+    <Grid Padding="24" RowDefinitions="Auto,*,Auto" RowSpacing="14" x:Name="PageRoot">
         <Label Text="♬"
                Style="{StaticResource WatermarkLabel}"
                HorizontalOptions="End"
                VerticalOptions="Start"
-               Margin="0,-25,-8,0" />
+               Margin="0,-44,-24,0" />
 
-        <Border Style="{StaticResource ModernCard}">
-            <VerticalStackLayout Spacing="4">
-                <Label Text="Usuarios" Style="{StaticResource HeroTitle}" />
-                <Label Text="Centro de cuentas y permisos del sistema SongManager."
+        <Border x:Name="HeroCard" Style="{StaticResource GlassCard}">
+            <VerticalStackLayout Spacing="6">
+                <Label Text="Administración de Usuarios" Style="{StaticResource HeroTitle}" />
+                <Label Text="Centro de control para cuentas, permisos y seguridad del sistema."
                        Style="{StaticResource HeroSubtitle}" />
             </VerticalStackLayout>
         </Border>
 
-        <Grid Grid.Row="1" ColumnDefinitions="*,*" ColumnSpacing="12">
-            <Border Style="{StaticResource ModernCard}">
+        <Grid Grid.Row="1" ColumnDefinitions="*,*" RowDefinitions="*,*" RowSpacing="12" ColumnSpacing="12" x:Name="UsersInfoGrid">
+            <Border Style="{StaticResource GlassCard}">
                 <VerticalStackLayout Spacing="6">
-                    <Label Text="Seguridad" FontAttributes="Bold" FontSize="16" />
-                    <Label Text="Próximamente: roles, políticas de acceso y auditoría avanzada."
-                           TextColor="{AppThemeBinding Light=#5A627D, Dark=#B7BFDA}" />
+                    <Label Text="Seguridad" FontAttributes="Bold" FontSize="17" />
+                    <Label Text="Próximo paso: políticas de contraseña, bloqueo y recuperación." FontSize="13" />
                 </VerticalStackLayout>
             </Border>
-            <Border Grid.Column="1" Style="{StaticResource ModernCard}">
+            <Border Grid.Column="1" Style="{StaticResource GlassCard}">
                 <VerticalStackLayout Spacing="6">
-                    <Label Text="Estado del módulo" FontAttributes="Bold" FontSize="16" />
-                    <Label Text="Interfaz modernizada y preparada para integración de CRUD de usuarios."
-                           TextColor="{AppThemeBinding Light=#5A627D, Dark=#B7BFDA}" />
+                    <Label Text="Roles" FontAttributes="Bold" FontSize="17" />
+                    <Label Text="Base preparada para manejar perfiles Administrador, Editor y Lector." FontSize="13" />
+                </VerticalStackLayout>
+            </Border>
+            <Border Grid.Row="1" Style="{StaticResource GlassCard}">
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="Auditoría" FontAttributes="Bold" FontSize="17" />
+                    <Label Text="Registro de cambios y trazabilidad de operaciones críticas." FontSize="13" />
+                </VerticalStackLayout>
+            </Border>
+            <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource GlassCard}">
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="Estado" FontAttributes="Bold" FontSize="17" />
+                    <Label Text="UI lista para conectar con el CRUD y reglas de negocio de usuarios." FontSize="13" />
                 </VerticalStackLayout>
             </Border>
         </Grid>
 
-        <Border Grid.Row="2" Style="{StaticResource ModernCard}">
-            <VerticalStackLayout Spacing="10" VerticalOptions="Center" HorizontalOptions="Center">
-                <Label Text="👤" FontSize="48" HorizontalTextAlignment="Center" />
-                <Label Text="Módulo listo para expansión"
+        <Border Grid.Row="2" Style="{StaticResource GlassCard}" x:Name="BottomCard">
+            <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+                <Label Text="👤" FontSize="28" />
+                <Label Text="Módulo preparado para crecimiento profesional"
                        FontAttributes="Bold"
-                       FontSize="20"
-                       HorizontalTextAlignment="Center" />
-                <Label Text="Conecta tu repositorio de usuarios para habilitar administración completa."
-                       HorizontalTextAlignment="Center"
-                       TextColor="{AppThemeBinding Light=#5A627D, Dark=#B7BFDA}" />
-            </VerticalStackLayout>
+                       VerticalOptions="Center" />
+            </HorizontalStackLayout>
         </Border>
     </Grid>
 </pages:BaseContentPage>

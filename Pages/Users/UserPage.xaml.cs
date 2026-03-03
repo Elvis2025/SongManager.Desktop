@@ -15,10 +15,13 @@ public partial class UserPage : BaseContentPage<UserPageModel>
 
     private async Task AnimateEntranceAsync()
     {
-        PageRoot.Opacity = 0;
-        PageRoot.TranslationY = 16;
-        await Task.WhenAll(
-            PageRoot.FadeTo(1, 320, Easing.CubicOut),
-            PageRoot.TranslateTo(0, 0, 320, Easing.CubicOut));
+        HeroCard.Opacity = 0;
+        UsersInfoGrid.Opacity = 0;
+        BottomCard.Opacity = 0;
+        HeroCard.TranslationY = -10;
+        await HeroCard.FadeTo(1, 220, Easing.CubicOut);
+        await HeroCard.TranslateTo(0, 0, 220, Easing.CubicOut);
+        await UsersInfoGrid.FadeTo(1, 260, Easing.CubicOut);
+        await BottomCard.FadeTo(1, 220, Easing.CubicOut);
     }
 }

@@ -19,10 +19,13 @@ public partial class SingersPage : BaseContentPage<SingersPageModel>
 
     private async Task AnimateEntranceAsync()
     {
-        PageRoot.Opacity = 0;
-        PageRoot.TranslationY = 16;
-        await Task.WhenAll(
-            PageRoot.FadeTo(1, 320, Easing.CubicOut),
-            PageRoot.TranslateTo(0, 0, 320, Easing.CubicOut));
+        HeroCard.Opacity = 0;
+        HeroCard.TranslationY = -12;
+        StatsCard.Opacity = 0;
+        SingersCollection.Opacity = 0;
+        await HeroCard.FadeTo(1, 220, Easing.CubicOut);
+        await HeroCard.TranslateTo(0, 0, 220, Easing.CubicOut);
+        await StatsCard.FadeTo(1, 200, Easing.CubicOut);
+        await SingersCollection.FadeTo(1, 280, Easing.CubicOut);
     }
 }

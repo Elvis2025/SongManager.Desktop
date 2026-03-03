@@ -8,51 +8,33 @@
     xmlns:singers="clr-namespace:SongManager.Desktop.Pages.Singers"
     xmlns:users="clr-namespace:SongManager.Desktop.Pages.Users"
     FlyoutBehavior="Flyout"
-    Shell.TabBarTitleColor="{AppThemeBinding Light=#646B7A, Dark=#A9B1C3}"
-    Shell.TabBarUnselectedColor="{AppThemeBinding Light=#646B7A, Dark=#A9B1C3}"
-    Shell.TabBarForegroundColor="{AppThemeBinding Light=#635BFF, Dark=#9E97FF}"
-    Shell.TabBarBackgroundColor="{AppThemeBinding Light=#F9FAFF, Dark=#1A1D2E}">
+    Shell.NavBarIsVisible="False"
+    Shell.TabBarBackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#1A223C}"
+    Shell.TabBarForegroundColor="{AppThemeBinding Light=#5F57FA, Dark=#9C96FF}"
+    Shell.TabBarTitleColor="{AppThemeBinding Light=#252E56, Dark=#E6E9FF}"
+    Shell.TabBarUnselectedColor="{AppThemeBinding Light=#7B84A8, Dark=#AAB4D8}">
 
     <Shell.FlyoutHeader>
-        <Grid Padding="20,22" RowDefinitions="Auto,Auto">
-            <Label Text="SongManager Pro"
-                   FontSize="24"
-                   FontAttributes="Bold"
-                   TextColor="{AppThemeBinding Light=#171A2B, Dark=#F5F7FF}" />
-            <Label Grid.Row="1"
-                   Text="Administra canciones, cantantes y usuarios con estilo"
-                   Opacity="0.75"
-                   TextColor="{AppThemeBinding Light=#4E556A, Dark=#C6CAE1}" />
+        <Grid Padding="20" RowDefinitions="Auto,Auto,Auto" RowSpacing="6" BackgroundColor="{AppThemeBinding Light=#EEF2FF, Dark=#171F3A}">
+            <Label Text="SongManager" FontSize="28" FontAttributes="Bold" TextColor="{AppThemeBinding Light=#141C3A, Dark=#F2F4FF}" />
+            <Label Grid.Row="1" Text="Studio Control" FontSize="16" TextColor="{AppThemeBinding Light=#3A4B91, Dark=#AAB8FF}" />
+            <Label Grid.Row="2" Text="Gestiona repertorio, cantantes y enlaces de forma profesional." FontSize="13" Opacity="0.8" TextColor="{AppThemeBinding Light=#5F6A93, Dark=#C2CAE7}" />
         </Grid>
     </Shell.FlyoutHeader>
 
     <TabBar>
-        <ShellContent
-            Title="Canciones"
-            Icon="{StaticResource IconProjects}"
-            ContentTemplate="{DataTemplate songs:SongsPage}"
-            Route="SongsPage" />
-
-        <ShellContent
-            Title="Cantantes"
-            Icon="{StaticResource IconDashboard}"
-            ContentTemplate="{DataTemplate singers:SingersPage}"
-            Route="SingersPage" />
-
-        <ShellContent
-            Title="Usuarios"
-            Icon="{StaticResource IconMeta}"
-            ContentTemplate="{DataTemplate users:UserPage}"
-            Route="UserPage" />
+        <ShellContent Title="Canciones" Icon="{StaticResource IconProjects}" ContentTemplate="{DataTemplate songs:SongsPage}" Route="SongsPage" />
+        <ShellContent Title="Cantantes" Icon="{StaticResource IconDashboard}" ContentTemplate="{DataTemplate singers:SingersPage}" Route="SingersPage" />
+        <ShellContent Title="Usuarios" Icon="{StaticResource IconMeta}" ContentTemplate="{DataTemplate users:UserPage}" Route="UserPage" />
     </TabBar>
 
     <Shell.FlyoutFooter>
-        <Grid Padding="15">
+        <Grid Padding="14" BackgroundColor="{AppThemeBinding Light=#EEF2FF, Dark=#171F3A}">
             <sf:SfSegmentedControl x:Name="ThemeSegmentedControl"
                                    HorizontalOptions="Center"
                                    VerticalOptions="Center"
-                                   SegmentWidth="50"
-                                   SegmentHeight="44"
+                                   SegmentWidth="58"
+                                   SegmentHeight="46"
                                    SelectionChanged="SfSegmentedControl_SelectionChanged">
                 <sf:SfSegmentedControl.ItemsSource>
                     <x:Array Type="{x:Type sf:SfSegmentItem}">
