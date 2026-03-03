@@ -4,281 +4,101 @@
                        x:Class="SongManager.Desktop.Pages.Songs.SongsPage"
                        xmlns:pages="clr-namespace:SongManager.Desktop.Pages"
                        xmlns:pageModel="clr-namespace:SongManager.Desktop.PageModels"
-                       xmlns:resources="clr-namespace:SongManager.Desktop.Resx"
-                       xmlns:icon="clr-namespace:SongManager.Desktop.UsesCases.IconFont"
-                       xmlns:controls="clr-namespace:SongManager.Desktop.Pages"
-                       xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
                        x:TypeArguments="pageModel:SongsPageModel"
-                       Title=""
-                       >
-    <Grid Padding="10,0,10,10"
-          RowDefinitions="Auto,Auto,*,Auto"
-          >
-        <Label Text="Listado de canciones"
-               FontAttributes="Bold"
-               FontSize="36"
-               HorizontalOptions="Center"
-               VerticalOptions="Center"
-               Margin="0,0,0,20"
-               Grid.Row="0"
-               TextColor="{AppThemeBinding Dark={StaticResource LightBackground},Light={StaticResource Gray600}}"
-                />
+                       Shell.TabBarIsVisible="False"
+                       Background="{StaticResource PageBackgroundGradient}">
 
-        <HorizontalStackLayout Grid.Row="1" Margin="20,0,0,18" Spacing="20">
-            <Border HeightRequest="50"
-                    Padding="0"
-                    WidthRequest="372"
-                    >
-                <HorizontalStackLayout Margin="10,0,0,0" 
-                                       Spacing="10">
-                    <Label Text="Cantante"
-                           VerticalOptions="Center"
-                           VerticalTextAlignment="Center"
-                           FontAttributes="Bold"
-                           Margin="6,0,0,6"
-                           FontSize="20"
-                           
-                           />
-                    <Picker ItemsSource="{Binding Singers}"
-                            ItemDisplayBinding="{Binding FullName}"
-                            TextColor="{StaticResource Gray300}"
-                            FontAttributes="Bold"
-                            FontSize="18"
-                            VerticalOptions="Center"
-                            HorizontalOptions="Fill"
-                            HeightRequest="60"
-                            WidthRequest="260"
-                            SelectedIndexChanged="FilterSongsBySinger"
-                            x:Name="pkSingers"
-                            />
-                </HorizontalStackLayout>
-            </Border>
-            
-            <Border HeightRequest="50"
-                    Padding="0"
-                    WidthRequest="372"
-                    >
-                <HorizontalStackLayout Margin="10,0,0,0" 
-                                       Spacing="10">
-                    <Label Text="Canción"
-                           VerticalOptions="Center"
-                           VerticalTextAlignment="Center"
-                           FontAttributes="Bold"
-                           Margin="6,0,0,6"
-                           FontSize="20"
-                           />
-                    <Entry  x:Name="txtSong"
-                            TextColor="{StaticResource Gray300}"
-                            FontAttributes="Bold"
-                            FontSize="18"
-                            VerticalOptions="Center"
-                            HorizontalOptions="Fill"
-                            HeightRequest="60"
-                            WidthRequest="270"
-                            ClearButtonVisibility="WhileEditing"
-                            TextChanged="FilterSongsBySong"
-                            />
-                </HorizontalStackLayout>
-            </Border>
-            
-        </HorizontalStackLayout>
+    <Grid Padding="24,18,24,0" RowSpacing="14" RowDefinitions="Auto,Auto,Auto,*,Auto" x:Name="PageRoot">
+        <Label Text="♪"
+               Style="{StaticResource WatermarkLabel}"
+               HorizontalOptions="End"
+               VerticalOptions="Start"
+               Margin="0,-48,-26,0" />
 
-        <Border Padding="0" Grid.Row="2" Margin="20,0,20,0">
-            <Grid RowDefinitions="Auto,*" BackgroundColor="White"
-              >
-                
-                <Grid ColumnDefinitions="3*,4*,3*,2.5*"
-                      Padding="0,5"
-                      ColumnSpacing="15"
-                      Grid.Row="0"
-                      BackgroundColor="{AppThemeBinding Dark={StaticResource Gray600}, Light={StaticResource Gray300}}">
-                    <Label Text="Cantante" 
-                           Grid.Column="0" 
-                           Margin="18,0,0,0"
-                           FontAttributes="Bold"
-                           TextColor="{AppThemeBinding Dark={StaticResource LightBackground}, Light={StaticResource Gray600}}"
-                           />
-                    <Label Text="Canción" 
-                           FontAttributes="Bold" 
-                           Grid.Column="1" 
-                           TextColor="{AppThemeBinding Dark={StaticResource LightBackground}, Light={StaticResource Gray600}}"/>
-                    <Label Text="Autor" 
-                           Grid.Column="2" 
-                           FontAttributes="Bold"
-                           HorizontalOptions="Start"
-                           TextColor="{AppThemeBinding Dark={StaticResource LightBackground}, Light={StaticResource Gray600}}"/>
-
-                    <Label Text="Tono"
-                           Grid.Column="3" 
-                           FontAttributes="Bold"
-                           HorizontalOptions="Start"
-                           TextColor="{AppThemeBinding Dark={StaticResource LightBackground}, Light={StaticResource Gray600}}"/>
-                </Grid>
-
-                <ScrollView Grid.Row="1">
-                    <CollectionView ItemsSource="{Binding Songs}">
-                    
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                                <Grid ColumnDefinitions="3*,4*,3*,2.5*"
-                                      RowDefinitions="Auto,Auto"
-                                      Padding="0,10"
-                                      BackgroundColor="{Binding HexColor}"
-                                      ColumnSpacing="15"
-                                      RowSpacing="5"
-                                      >
-                                    
-                                    <Label Text="{Binding SingerName}" 
-                                       Grid.Column="0"
-                                       FontAttributes="Bold"
-                                       Margin="18,0,0,0"
-                                       TextColor="{AppThemeBinding Dark={StaticResource Gray400}, Light={StaticResource Gray400}}"/>
-
-                                    <Label Text="{Binding SongName}" 
-                                       TextColor="{AppThemeBinding Dark={StaticResource Gray400}, Light={StaticResource Gray400}}"
-                                       FontAttributes="Bold"
-                                       Grid.Column="1"/>
-
-                                    <Label Text="{Binding SongAuthor}" 
-                                       Grid.Column="2"
-                                       TextColor="{AppThemeBinding Dark={StaticResource Gray400}, Light={StaticResource Gray400}}"
-                                       FontAttributes="Bold"
-                                       HorizontalOptions="Start"/>
-
-                                    <Label Text="{Binding Key}" 
-                                           Grid.Column="3"
-                                           FontAttributes="Bold"
-                                           TextColor="{AppThemeBinding Dark={StaticResource Gray400}, Light={StaticResource Gray400}}"
-                                           HorizontalOptions="Start"
-                                           Margin="15,0,0,0"/>
-
-                                    <Label Text="{Static icon:FluentUI.Ic_fluent_edit_48_regular}"
-                                           FontFamily="{Static icon:FluentUI.FontFamily}"
-                                           HorizontalOptions="End"
-                                           VerticalOptions="Center"
-                                           FontAttributes="Bold"
-                                           FontSize="22"
-                                           Margin="4,0,12,0"
-                                           Grid.Column="3"
-                                           TextColor="DarkSlateBlue"
-                                            >
-                                        <Label.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.EditSongCommand}"
-                                                                  CommandParameter="{Binding .}"/>
-                                        </Label.GestureRecognizers>
-                                    </Label>
-
-                                    <Label Text="{Static icon:FluentUI.Ic_fluent_delete_48_regular}"
-                                           FontFamily="{Static icon:FluentUI.FontFamily}"
-                                           HorizontalOptions="End"
-                                           VerticalOptions="Center"
-                                           FontAttributes="Bold"
-                                           FontSize="22"
-                                           Margin="4,0,12,0"
-                                           Grid.Column="3"
-                                           Grid.Row="1"
-                                           TextColor="PaleVioletRed">
-                                        <Label.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.DeleteSongCommand}"
-                                                                  CommandParameter="{Binding .}"/>
-                                        </Label.GestureRecognizers>
-                                    </Label>
-                                    
-
-                                    <!--<HorizontalStackLayout Grid.Row="1"
-                                                           Grid.Column="1"
-                                                           Grid.ColumnSpan="4"
-                                                           Spacing="10"
-                                                           >
-
-                                        <Label Text="Comentario:"
-                                               FontAttributes="Bold"
-                                               TextColor="{StaticResource Gray400}"
-                                               />
-                                        
-                                        <Label Text="{Binding Comment}"
-                                               />
-                                        
-                                    </HorizontalStackLayout>-->
-                                    <Border Grid.Row="1"
-                                            Grid.Column="0"
-                                            Grid.ColumnSpan="4"
-                                            Padding="20,0,20,0"
-                                            Margin="8,0,0,0"
-                                            HorizontalOptions="Start"
-                                            Background="LightSalmon"
-                                            HeightRequest="35"
-                                            >
-
-                                        <Label Grid.Row="1"
-                                               Grid.ColumnSpan="4"
-                                               Text="Ver en youtube"
-                                               TextDecorations="Underline"
-                                               TextColor="DarkBlue"
-                                               FontAttributes="Bold"
-                                               VerticalOptions="Center"
-                                           />
-                                        <Border.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.OpenLinkSongCommand}"
-                                                                  CommandParameter="{Binding Link}"
-                                                                  />
-
-                                        </Border.GestureRecognizers>
-                                    </Border>
-                                </Grid>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-                </ScrollView>
+        <Border x:Name="HeroCard" Style="{StaticResource GlassCard}">
+            <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto" RowSpacing="6">
+                <Label Text="Panel de Canciones" Style="{StaticResource HeroTitle}" />
+                <Label Grid.Row="1" Text="Busca, filtra y gestiona canciones con rapidez." Style="{StaticResource HeroSubtitle}" />
+                <Button Grid.Column="1" Grid.RowSpan="2" VerticalOptions="Center" Text="+ Nueva" Style="{StaticResource PrimaryActionButton}" Command="{Binding CreateSongCommand}" />
             </Grid>
         </Border>
 
-        <Border HorizontalOptions="End"
-          VerticalOptions="End"
-          StrokeShape="RoundRectangle 100"
-          Padding="9.5,9.5,6,-3"
-          Margin="0,30,30,30"
-          Grid.Row="3"
-          >
+        <Grid Grid.Row="1" ColumnDefinitions="*,Auto,Auto" ColumnSpacing="10">
+            <Border x:Name="StatsCard1" Style="{StaticResource GlassCard}">
+                <VerticalStackLayout Spacing="2">
+                    <Label Text="Total en biblioteca" FontSize="12" Opacity="0.8" />
+                    <Label Text="{Binding SongsList.Count}" Style="{StaticResource StatNumber}" />
+                </VerticalStackLayout>
+            </Border>
+            <Border x:Name="StatsCard2" Grid.Column="1" Style="{StaticResource GlassCard}">
+                <VerticalStackLayout Spacing="2">
+                    <Label Text="Cantantes" FontSize="12" Opacity="0.8" />
+                    <Label Text="{Binding Singers.Count}" Style="{StaticResource StatNumber}" />
+                </VerticalStackLayout>
+            </Border>
+            <Border x:Name="StatsCard3" Grid.Column="2" Style="{StaticResource GlassCard}">
+                <VerticalStackLayout Spacing="2">
+                    <Label Text="Filtradas" FontSize="12" Opacity="0.8" />
+                    <Label Text="{Binding Songs.Count}" Style="{StaticResource StatNumber}" />
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
 
-            <Label Text="{Static icon:FluentUI.Ic_fluent_add_12_regular}"
-             FontFamily="{Static icon:FluentUI.FontFamily}"
-             VerticalOptions="Center"
-             FontAttributes="Bold"
-             FontSize="38"
-             HorizontalTextAlignment="Center"
-             VerticalTextAlignment="Center"
-             Margin="0,0,0,0"
-             Padding="0"
-             HorizontalOptions="Center"/>
-            <Border.GestureRecognizers>
-                <TapGestureRecognizer Command="{Binding  CreateSongCommand}"/>
-            </Border.GestureRecognizers>
+        <Border x:Name="FilterCard" Grid.Row="2" Style="{StaticResource GlassCard}">
+            <Grid ColumnDefinitions="1.3*,*" RowDefinitions="Auto,Auto" ColumnSpacing="12" RowSpacing="10">
+                <Border Grid.ColumnSpan="2" Style="{StaticResource FieldShell}">
+                    <Entry x:Name="txtSong" Placeholder="Buscar canción por nombre..." TextChanged="FilterSongsBySong" ClearButtonVisibility="WhileEditing" BackgroundColor="Transparent" />
+                </Border>
+
+                <Border Grid.Row="1" Style="{StaticResource FieldShell}">
+                    <Picker x:Name="pkSingers" Title="Filtrar por cantante" ItemsSource="{Binding Singers}" ItemDisplayBinding="{Binding FullName}" SelectedIndexChanged="FilterSongsBySinger" />
+                </Border>
+
+                <Button Grid.Row="1" Grid.Column="1" Text="Refrescar" Style="{StaticResource SecondaryActionButton}" Command="{Binding RefreshCommand}" />
+            </Grid>
         </Border>
 
-        <Border HorizontalOptions="End"
-          VerticalOptions="End"
-          StrokeShape="RoundRectangle 100"
-          Padding="13.5,12.5,11,-1"
-          Margin="0,0,100,30"
-          Grid.Row="3"
-          >
+        <RefreshView Grid.Row="3" Command="{Binding RefreshCommand}">
+            <CollectionView x:Name="SongsCollection" ItemsSource="{Binding Songs}" SelectionMode="None" Margin="0,4,0,8">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Style="{StaticResource GlassCard}" Margin="0,0,0,16">
+                            <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto,Auto" RowSpacing="10">
+                                <Label Text="{Binding SongName}" FontSize="20" FontAttributes="Bold" />
+                                <Border Grid.Column="1" Style="{StaticResource SoftChip}">
+                                    <Label Text="{Binding Key}" FontSize="12" FontAttributes="Bold" />
+                                </Border>
 
-            <Label Text="{Static icon:FluentUI.Ic_fluent_arrow_sync_12_regular}"
-             FontFamily="{Static icon:FluentUI.FontFamily}"
-             VerticalOptions="Center"
-             FontAttributes="Bold"
-             FontSize="38"
-             HorizontalTextAlignment="Center"
-             VerticalTextAlignment="Center"
-             Margin="-4,-4,0,0"
-             Padding="0"
-             HorizontalOptions="Center"/>
-            <Border.GestureRecognizers>
-                <TapGestureRecognizer Command="{Binding  RefreshCommand}"/>
-            </Border.GestureRecognizers>
+                                <Label Grid.Row="1" Text="{Binding SongAuthor, StringFormat='Autor: {0}'}" TextColor="{AppThemeBinding Light=#5C668D, Dark=#B6C0E4}" />
+                                <Label Grid.Row="1" Grid.Column="1" Text="{Binding SingerName}" FontAttributes="Bold" TextColor="{AppThemeBinding Light=#3B4B99, Dark=#C9D2FF}" />
+
+                                <Grid Grid.Row="2" Grid.ColumnSpan="2" ColumnDefinitions="Auto,Auto,Auto,*" ColumnSpacing="8">
+                                    <Button Text="Editar" Style="{StaticResource SecondaryActionButton}" Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.EditSongCommand}" CommandParameter="{Binding .}" />
+                                    <Button Grid.Column="1" Text="Eliminar" BackgroundColor="{AppThemeBinding Light=#FEE3E3, Dark=#54283A}" TextColor="{AppThemeBinding Light=#B42318, Dark=#FFC0CF}" Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.DeleteSongCommand}" CommandParameter="{Binding .}" />
+                                    <Button Grid.Column="2" Text="Abrir Link" Style="{StaticResource PrimaryActionButton}" Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.OpenLinkSongCommand}" CommandParameter="{Binding Link}" />
+                                </Grid>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                <CollectionView.EmptyView>
+                    <Border Style="{StaticResource GlassCard}">
+                        <VerticalStackLayout HorizontalOptions="Center" Spacing="6">
+                            <Label Text="🎵" FontSize="38" HorizontalTextAlignment="Center" />
+                            <Label Text="No hay canciones para mostrar" FontAttributes="Bold" HorizontalTextAlignment="Center" />
+                            <Label Text="Crea una canción nueva o limpia los filtros para continuar." FontSize="13" HorizontalTextAlignment="Center" TextColor="{AppThemeBinding Light=#5A6389, Dark=#BAC3E5}" />
+                        </VerticalStackLayout>
+                    </Border>
+                </CollectionView.EmptyView>
+            </CollectionView>
+        </RefreshView>
+
+        <Border Grid.Row="4" x:Name="BottomNav" Style="{StaticResource FloatingBottomBar}">
+            <Grid ColumnDefinitions="*,*,*" ColumnSpacing="8">
+                <Button Text="Canciones" Style="{StaticResource PrimaryActionButton}" Clicked="GoSongs_Clicked" />
+                <Button Grid.Column="1" Text="Cantantes" Style="{StaticResource SecondaryActionButton}" Clicked="GoSingers_Clicked" />
+                <Button Grid.Column="2" Text="Usuarios" Style="{StaticResource SecondaryActionButton}" Clicked="GoUsers_Clicked" />
+            </Grid>
         </Border>
-        
-        
     </Grid>
 </pages:BaseContentPage>

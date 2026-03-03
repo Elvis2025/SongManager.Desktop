@@ -7,34 +7,33 @@
     xmlns:songs="clr-namespace:SongManager.Desktop.Pages.Songs"
     xmlns:singers="clr-namespace:SongManager.Desktop.Pages.Singers"
     xmlns:users="clr-namespace:SongManager.Desktop.Pages.Users"
-    Shell.FlyoutBehavior="Flyout">
+    FlyoutBehavior="Flyout"
+    Shell.NavBarIsVisible="False">
 
-    <ShellContent
-        Title="Canciones"
-        Icon="{StaticResource IconDashboard}"
-        ContentTemplate="{DataTemplate songs:SongsPage}"
-        Route="SongsPage" />
-    <ShellContent
-         Title="Cantantes"
-         Icon="{StaticResource IconDashboard}"
-         ContentTemplate="{DataTemplate singers:SingersPage}"
-         Route="SingersPage" />
-    
-    <ShellContent
-         Title="Usuarios"
-         Icon="{StaticResource IconDashboard}"
-         ContentTemplate="{DataTemplate users:UserPage}"
-         Route="UserPage" />
+    <Shell.FlyoutHeader>
+        <Grid Padding="20" RowDefinitions="Auto,Auto,Auto" RowSpacing="6" BackgroundColor="{AppThemeBinding Light=#EEF2FF, Dark=#171F3A}">
+            <Label Text="SongManager" FontSize="28" FontAttributes="Bold" TextColor="{AppThemeBinding Light=#141C3A, Dark=#F2F4FF}" />
+            <Label Grid.Row="1" Text="Studio Control" FontSize="16" TextColor="{AppThemeBinding Light=#3A4B91, Dark=#AAB8FF}" />
+            <Label Grid.Row="2" Text="Gestiona repertorio, cantantes y enlaces de forma profesional." FontSize="13" Opacity="0.8" TextColor="{AppThemeBinding Light=#5F6A93, Dark=#C2CAE7}" />
+        </Grid>
+    </Shell.FlyoutHeader>
+
+    <ShellContent Title="Canciones" Icon="{StaticResource IconProjects}" ContentTemplate="{DataTemplate songs:SongsPage}" Route="SongsPage" />
+    <ShellContent Title="Cantantes" Icon="{StaticResource IconDashboard}" ContentTemplate="{DataTemplate singers:SingersPage}" Route="SingersPage" />
+    <ShellContent Title="Usuarios" Icon="{StaticResource IconMeta}" ContentTemplate="{DataTemplate users:UserPage}" Route="UserPage" />
 
     <Shell.FlyoutFooter>
-        <Grid Padding="15">
-            <sf:SfSegmentedControl x:Name="ThemeSegmentedControl" 
-                VerticalOptions="Center" HorizontalOptions="Center" SelectionChanged="SfSegmentedControl_SelectionChanged"
-                SegmentWidth="40" SegmentHeight="40">
+        <Grid Padding="14" BackgroundColor="{AppThemeBinding Light=#EEF2FF, Dark=#171F3A}">
+            <sf:SfSegmentedControl x:Name="ThemeSegmentedControl"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"
+                                   SegmentWidth="58"
+                                   SegmentHeight="46"
+                                   SelectionChanged="SfSegmentedControl_SelectionChanged">
                 <sf:SfSegmentedControl.ItemsSource>
                     <x:Array Type="{x:Type sf:SfSegmentItem}">
-                        <sf:SfSegmentItem ImageSource="{StaticResource IconLight}"/>
-                        <sf:SfSegmentItem ImageSource="{StaticResource IconDark}"/>
+                        <sf:SfSegmentItem ImageSource="{StaticResource IconLight}" />
+                        <sf:SfSegmentItem ImageSource="{StaticResource IconDark}" />
                     </x:Array>
                 </sf:SfSegmentedControl.ItemsSource>
             </sf:SfSegmentedControl>
