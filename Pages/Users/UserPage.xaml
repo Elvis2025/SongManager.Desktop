@@ -4,15 +4,58 @@
                        x:Class="SongManager.Desktop.Pages.Users.UserPage"
                        xmlns:pages="clr-namespace:SongManager.Desktop.Pages"
                        xmlns:pageModel="clr-namespace:SongManager.Desktop.PageModels"
-                       xmlns:resources="clr-namespace:SongManager.Desktop.Resx"
-                       xmlns:icon="clr-namespace:SongManager.Desktop.UsesCases.IconFont"
-                       xmlns:controls="clr-namespace:SongManager.Desktop.Pages"
-                       xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-                       x:TypeArguments="pageModel:UserPageModel">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+                       x:TypeArguments="pageModel:UserPageModel"
+                       Background="{StaticResource PageBackgroundGradient}">
+
+    <Grid Padding="24" RowDefinitions="Auto,*,Auto" RowSpacing="14" x:Name="PageRoot">
+        <Label Text="♬"
+               Style="{StaticResource WatermarkLabel}"
+               HorizontalOptions="End"
+               VerticalOptions="Start"
+               Margin="0,-44,-24,0" />
+
+        <Border x:Name="HeroCard" Style="{StaticResource GlassCard}">
+            <VerticalStackLayout Spacing="6">
+                <Label Text="Administración de Usuarios" Style="{StaticResource HeroTitle}" />
+                <Label Text="Centro de control para cuentas, permisos y seguridad del sistema."
+                       Style="{StaticResource HeroSubtitle}" />
+            </VerticalStackLayout>
+        </Border>
+
+        <Grid Grid.Row="1" ColumnDefinitions="*,*" RowDefinitions="*,*" RowSpacing="12" ColumnSpacing="12" x:Name="UsersInfoGrid">
+            <Border Style="{StaticResource GlassCard}">
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="Seguridad" FontAttributes="Bold" FontSize="17" />
+                    <Label Text="Próximo paso: políticas de contraseña, bloqueo y recuperación." FontSize="13" />
+                </VerticalStackLayout>
+            </Border>
+            <Border Grid.Column="1" Style="{StaticResource GlassCard}">
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="Roles" FontAttributes="Bold" FontSize="17" />
+                    <Label Text="Base preparada para manejar perfiles Administrador, Editor y Lector." FontSize="13" />
+                </VerticalStackLayout>
+            </Border>
+            <Border Grid.Row="1" Style="{StaticResource GlassCard}">
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="Auditoría" FontAttributes="Bold" FontSize="17" />
+                    <Label Text="Registro de cambios y trazabilidad de operaciones críticas." FontSize="13" />
+                </VerticalStackLayout>
+            </Border>
+            <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource GlassCard}">
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="Estado" FontAttributes="Bold" FontSize="17" />
+                    <Label Text="UI lista para conectar con el CRUD y reglas de negocio de usuarios." FontSize="13" />
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
+
+        <Border Grid.Row="2" Style="{StaticResource GlassCard}" x:Name="BottomCard">
+            <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+                <Label Text="👤" FontSize="28" />
+                <Label Text="Módulo preparado para crecimiento profesional"
+                       FontAttributes="Bold"
+                       VerticalOptions="Center" />
+            </HorizontalStackLayout>
+        </Border>
+    </Grid>
 </pages:BaseContentPage>

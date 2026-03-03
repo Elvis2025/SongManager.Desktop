@@ -14,6 +14,26 @@ public partial class SongsPage : BaseContentPage<SongsPageModel>
     {
         base.OnAppearing();
         basePageModel.Init();
+        _ = AnimateEntranceAsync();
+    }
+
+    private async Task AnimateEntranceAsync()
+    {
+        HeroCard.Opacity = 0;
+        HeroCard.TranslationY = -12;
+        StatsCard1.Opacity = 0;
+        StatsCard2.Opacity = 0;
+        StatsCard3.Opacity = 0;
+        FilterCard.Opacity = 0;
+        SongsCollection.Opacity = 0;
+        await HeroCard.FadeTo(1, 220, Easing.CubicOut);
+        await HeroCard.TranslateTo(0, 0, 220, Easing.CubicOut);
+        await Task.WhenAll(
+            StatsCard1.FadeTo(1, 180, Easing.CubicOut),
+            StatsCard2.FadeTo(1, 240, Easing.CubicOut),
+            StatsCard3.FadeTo(1, 300, Easing.CubicOut));
+        await FilterCard.FadeTo(1, 180, Easing.CubicOut);
+        await SongsCollection.FadeTo(1, 260, Easing.CubicOut);
     }
 
 
