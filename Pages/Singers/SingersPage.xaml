@@ -8,11 +8,11 @@
                        Shell.TabBarIsVisible="False"
                        Background="{StaticResource PageBackgroundGradient}">
 
-    <Grid Padding="24,18,24,0" RowDefinitions="Auto,Auto,*,Auto" RowSpacing="14" x:Name="PageRoot">
-        <Label Text="♫" Style="{StaticResource WatermarkLabel}" HorizontalOptions="End" VerticalOptions="Start" Margin="0,-40,-24,0" />
+    <Grid Padding="16,12,16,0" RowDefinitions="Auto,Auto,*,Auto" RowSpacing="10" x:Name="PageRoot">
+        <Label Text="♫" Style="{StaticResource WatermarkLabel}" HorizontalOptions="End" VerticalOptions="Start" Margin="0,-24,-10,0" />
 
         <Border x:Name="HeroCard" Style="{StaticResource GlassCard}">
-            <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto" RowSpacing="6">
+            <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto" RowSpacing="4">
                 <Label Text="Directorio de Cantantes" Style="{StaticResource HeroTitle}" />
                 <Label Grid.Row="1" Text="Visualiza datos vocales y administra perfiles con claridad." Style="{StaticResource HeroSubtitle}" />
                 <Button Grid.Column="1" Grid.RowSpan="2" Text="+ Nuevo" IsVisible="{Binding CanManageSingers}" Style="{StaticResource PrimaryActionButton}" Command="{Binding CreateSingerCommand}" />
@@ -20,19 +20,19 @@
         </Border>
 
         <Border x:Name="StatsCard" Grid.Row="1" Style="{StaticResource GlassCard}">
-            <HorizontalStackLayout Spacing="12">
+            <HorizontalStackLayout Spacing="8">
                 <Border Style="{StaticResource SoftChip}"><Label Text="Total" FontAttributes="Bold" /></Border>
                 <Label Text="{Binding SingersDto.Count}" Style="{StaticResource StatNumber}" />
                 <Label Text="cantantes registrados" VerticalOptions="Center" TextColor="{AppThemeBinding Light=#5E678D, Dark=#BCC5E7}" />
             </HorizontalStackLayout>
         </Border>
 
-        <CollectionView Grid.Row="2" x:Name="SingersCollection" ItemsSource="{Binding SingersDto}" SelectionMode="None" Margin="0,4,0,8">
+        <CollectionView Grid.Row="2" x:Name="SingersCollection" ItemsSource="{Binding SingersDto}" SelectionMode="None" Margin="0,2,0,6">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Border Style="{StaticResource GlassCard}" Margin="0,0,0,16">
-                        <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto,Auto" RowSpacing="10">
-                            <Label Text="{Binding FullNameComplete}" FontSize="18" FontAttributes="Bold" />
+                    <Border Style="{StaticResource GlassCard}" Margin="0,0,0,10">
+                        <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto,Auto" RowSpacing="6">
+                            <Label Text="{Binding FullNameComplete}" FontSize="16" FontAttributes="Bold" />
                             <Border Grid.Column="1" Style="{StaticResource SoftChip}"><Label Text="{Binding Code}" FontAttributes="Bold" FontSize="12" /></Border>
 
                             <HorizontalStackLayout Grid.Row="1" Grid.ColumnSpan="2" Spacing="8">

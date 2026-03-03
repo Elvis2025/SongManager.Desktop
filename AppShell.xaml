@@ -11,10 +11,10 @@
     Shell.NavBarIsVisible="False">
 
     <Shell.FlyoutHeader>
-        <Grid Padding="20" RowDefinitions="Auto,Auto,Auto" RowSpacing="6" BackgroundColor="{AppThemeBinding Light=#EEF2FF, Dark=#171F3A}">
-            <Label Text="SongManager" FontSize="28" FontAttributes="Bold" TextColor="{AppThemeBinding Light=#141C3A, Dark=#F2F4FF}" />
-            <Label Grid.Row="1" Text="Studio Control" FontSize="16" TextColor="{AppThemeBinding Light=#3A4B91, Dark=#AAB8FF}" />
-            <Label Grid.Row="2" Text="Gestiona repertorio, cantantes y enlaces de forma profesional." FontSize="13" Opacity="0.8" TextColor="{AppThemeBinding Light=#5F6A93, Dark=#C2CAE7}" />
+        <Grid Padding="16" RowDefinitions="Auto,Auto,Auto" RowSpacing="4" BackgroundColor="{AppThemeBinding Light=#EEF2FF, Dark=#171F3A}">
+            <Label Text="SongManager" FontSize="24" FontAttributes="Bold" TextColor="{AppThemeBinding Light=#141C3A, Dark=#F2F4FF}" />
+            <Label Grid.Row="1" Text="Studio Control" FontSize="14" TextColor="{AppThemeBinding Light=#3A4B91, Dark=#AAB8FF}" />
+            <Label Grid.Row="2" Text="Gestiona repertorio, cantantes y enlaces." FontSize="12" Opacity="0.8" TextColor="{AppThemeBinding Light=#5F6A93, Dark=#C2CAE7}" />
         </Grid>
     </Shell.FlyoutHeader>
 

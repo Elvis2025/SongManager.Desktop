@@ -48,9 +48,9 @@
     <FontImageSource x:Key="IconDark" Glyph="{x:Static f:FluentUI.Ic_fluent_weather_moon_28_regular}" FontFamily="{x:Static f:FluentUI.FontFamily}" Color="{AppThemeBinding Light=#171A2B, Dark=#E6E9FF}" Size="{StaticResource size240}" />
 
     <Style TargetType="Border">
-        <Setter Property="StrokeShape" Value="RoundRectangle 18"/>
+        <Setter Property="StrokeShape" Value="RoundRectangle 14"/>
         <Setter Property="StrokeThickness" Value="0"/>
-        <Setter Property="Padding" Value="16"/>
+        <Setter Property="Padding" Value="12"/>
     </Style>
 
     <sf:LabelStyle x:Key="lightThemeLabelStyle" TextColor="#212742" FontSize="{OnIdiom 16, Desktop=20}"/> 
@@ -78,8 +78,8 @@
         <Setter Property="Background" Value="{AppThemeBinding Light=#FFFFFF, Dark=#1B2340}" />
         <Setter Property="Stroke" Value="{AppThemeBinding Light=#DDE4FF, Dark=#33406A}" />
         <Setter Property="StrokeThickness" Value="1" />
-        <Setter Property="StrokeShape" Value="RoundRectangle 24" />
-        <Setter Property="Padding" Value="16" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 18" />
+        <Setter Property="Padding" Value="12" />
         <Setter Property="Shadow">
             <Setter.Value>
                 <Shadow Brush="{AppThemeBinding Light=#1A2A6840, Dark=#00000070}" Offset="0,8" Radius="18" Opacity="0.35" />
@@ -88,36 +88,38 @@
     </Style>
 
     <Style x:Key="HeroTitle" TargetType="Label">
-        <Setter Property="FontSize" Value="32" />
+        <Setter Property="FontSize" Value="24" />
         <Setter Property="FontAttributes" Value="Bold" />
         <Setter Property="TextColor" Value="{AppThemeBinding Light=#141B36, Dark=#F1F4FF}" />
     </Style>
 
     <Style x:Key="HeroSubtitle" TargetType="Label">
-        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontSize" Value="13" />
         <Setter Property="TextColor" Value="{AppThemeBinding Light=#596287, Dark=#B8C1E4}" />
         <Setter Property="Opacity" Value="0.95" />
     </Style>
 
     <Style x:Key="WatermarkLabel" TargetType="Label">
-        <Setter Property="FontSize" Value="140" />
+        <Setter Property="FontSize" Value="86" />
         <Setter Property="FontAttributes" Value="Bold" />
         <Setter Property="Rotation" Value="-12" />
-        <Setter Property="Opacity" Value="0.045" />
+        <Setter Property="Opacity" Value="0.03" />
         <Setter Property="TextColor" Value="{AppThemeBinding Light=#2D44C7, Dark=#AAB8FF}" />
     </Style>
 
     <Style x:Key="PrimaryActionButton" TargetType="Button">
-        <Setter Property="CornerRadius" Value="16" />
-        <Setter Property="Padding" Value="16,12" />
+        <Setter Property="CornerRadius" Value="12" />
+        <Setter Property="Padding" Value="12,8" />
+        <Setter Property="FontSize" Value="14" />
         <Setter Property="FontAttributes" Value="Bold" />
         <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=#5E55FA, Dark=#8D86FF}" />
         <Setter Property="TextColor" Value="White" />
     </Style>
 
     <Style x:Key="SecondaryActionButton" TargetType="Button">
-        <Setter Property="CornerRadius" Value="14" />
-        <Setter Property="Padding" Value="12,10" />
+        <Setter Property="CornerRadius" Value="12" />
+        <Setter Property="Padding" Value="10,8" />
+        <Setter Property="FontSize" Value="13" />
         <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=#ECF0FF, Dark=#2C3659}" />
         <Setter Property="TextColor" Value="{AppThemeBinding Light=#2B3EA0, Dark=#D3DBFF}" />
         <Setter Property="FontAttributes" Value="Bold" />
@@ -131,7 +133,7 @@
     </Style>
 
     <Style x:Key="StatNumber" TargetType="Label">
-        <Setter Property="FontSize" Value="26" />
+        <Setter Property="FontSize" Value="20" />
         <Setter Property="FontAttributes" Value="Bold" />
         <Setter Property="TextColor" Value="{AppThemeBinding Light=#172048, Dark=#EEF2FF}" />
     </Style>
@@ -140,17 +142,17 @@
         <Setter Property="Background" Value="{AppThemeBinding Light=#F8FAFF, Dark=#1E2745}" />
         <Setter Property="Stroke" Value="{AppThemeBinding Light=#D8E0FF, Dark=#36456F}" />
         <Setter Property="StrokeThickness" Value="1" />
-        <Setter Property="StrokeShape" Value="RoundRectangle 14" />
-        <Setter Property="Padding" Value="10,6" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 12" />
+        <Setter Property="Padding" Value="8,4" />
     </Style>
 
     <Style x:Key="FloatingBottomBar" TargetType="Border">
         <Setter Property="Background" Value="{AppThemeBinding Light=#FFFFFF, Dark=#1A2443}" />
         <Setter Property="Stroke" Value="{AppThemeBinding Light=#D7E0FF, Dark=#36456F}" />
-        <Setter Property="StrokeShape" Value="RoundRectangle 26" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 20" />
         <Setter Property="StrokeThickness" Value="1" />
-        <Setter Property="Padding" Value="10,8" />
-        <Setter Property="Margin" Value="18,0,18,16" />
+        <Setter Property="Padding" Value="8,6" />
+        <Setter Property="Margin" Value="24,0,24,12" />
         <Setter Property="Shadow">
             <Setter.Value>
                 <Shadow Brush="{AppThemeBinding Light=#1A2A6840, Dark=#00000070}" Offset="0,10" Radius="20" Opacity="0.4" />

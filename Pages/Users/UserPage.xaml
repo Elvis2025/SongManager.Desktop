@@ -8,8 +8,8 @@
                        Shell.TabBarIsVisible="False"
                        Background="{StaticResource PageBackgroundGradient}">
 
-    <Grid Padding="24,18,24,0" RowDefinitions="Auto,*,Auto" RowSpacing="14" x:Name="PageRoot">
-        <Label Text="♬" Style="{StaticResource WatermarkLabel}" HorizontalOptions="End" VerticalOptions="Start" Margin="0,-44,-24,0" />
+    <Grid Padding="16,12,16,0" RowDefinitions="Auto,*,Auto" RowSpacing="10" x:Name="PageRoot">
+        <Label Text="♬" Style="{StaticResource WatermarkLabel}" HorizontalOptions="End" VerticalOptions="Start" Margin="0,-24,-10,0" />
 
         <Border x:Name="HeroCard" Style="{StaticResource GlassCard}">
             <VerticalStackLayout Spacing="6">
@@ -20,10 +20,10 @@
 
         <Grid Grid.Row="1" RowDefinitions="Auto,*" RowSpacing="12" x:Name="UsersInfoGrid">
             <Border Style="{StaticResource GlassCard}" IsVisible="{Binding CanManageUsers}">
-                <VerticalStackLayout Spacing="10">
+                <VerticalStackLayout Spacing="8">
                     <Label Text="{Binding EditorTitle}" FontAttributes="Bold" FontSize="20" />
 
-                    <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto,Auto,Auto" ColumnSpacing="10" RowSpacing="10">
+                    <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto,Auto,Auto" ColumnSpacing="8" RowSpacing="8">
                         <Border Style="{StaticResource FieldShell}"><Entry Placeholder="Usuario" Text="{Binding CurrentUser.Username}" /></Border>
                         <Border Grid.Column="1" Style="{StaticResource FieldShell}"><Entry Placeholder="Correo" Keyboard="Email" Text="{Binding CurrentUser.Email}" /></Border>
                         <Border Grid.Row="1" Style="{StaticResource FieldShell}"><Entry Placeholder="Primer nombre" Text="{Binding CurrentUser.FirstName}" /></Border>
@@ -45,12 +45,12 @@
             </Border>
 
             <Border Grid.Row="1" Style="{StaticResource GlassCard}">
-                <VerticalStackLayout Spacing="10">
+                <VerticalStackLayout Spacing="8">
                     <Label Text="Usuarios registrados" FontAttributes="Bold" FontSize="18" />
                     <CollectionView ItemsSource="{Binding Users}" SelectionMode="None" Margin="0,4,0,0">
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
-                                <Border Style="{StaticResource FieldShell}" Margin="0,0,0,12">
+                                <Border Style="{StaticResource FieldShell}" Margin="0,0,0,8">
                                     <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto" RowSpacing="4">
                                         <Label Text="{Binding FullName}" FontAttributes="Bold" />
                                         <Border Grid.Column="1" Style="{StaticResource SoftChip}">
