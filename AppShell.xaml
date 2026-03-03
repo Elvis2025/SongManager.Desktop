@@ -8,11 +8,7 @@
     xmlns:singers="clr-namespace:SongManager.Desktop.Pages.Singers"
     xmlns:users="clr-namespace:SongManager.Desktop.Pages.Users"
     FlyoutBehavior="Flyout"
-    Shell.NavBarIsVisible="False"
-    Shell.TabBarBackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#1A223C}"
-    Shell.TabBarForegroundColor="{AppThemeBinding Light=#5F57FA, Dark=#9C96FF}"
-    Shell.TabBarTitleColor="{AppThemeBinding Light=#252E56, Dark=#E6E9FF}"
-    Shell.TabBarUnselectedColor="{AppThemeBinding Light=#7B84A8, Dark=#AAB4D8}">
+    Shell.NavBarIsVisible="False">
 
     <Shell.FlyoutHeader>
         <Grid Padding="20" RowDefinitions="Auto,Auto,Auto" RowSpacing="6" BackgroundColor="{AppThemeBinding Light=#EEF2FF, Dark=#171F3A}">
@@ -22,11 +18,9 @@
         </Grid>
     </Shell.FlyoutHeader>
 
-    <TabBar>
-        <ShellContent Title="Canciones" Icon="{StaticResource IconProjects}" ContentTemplate="{DataTemplate songs:SongsPage}" Route="SongsPage" />
-        <ShellContent Title="Cantantes" Icon="{StaticResource IconDashboard}" ContentTemplate="{DataTemplate singers:SingersPage}" Route="SingersPage" />
-        <ShellContent Title="Usuarios" Icon="{StaticResource IconMeta}" ContentTemplate="{DataTemplate users:UserPage}" Route="UserPage" />
-    </TabBar>
+    <ShellContent Title="Canciones" Icon="{StaticResource IconProjects}" ContentTemplate="{DataTemplate songs:SongsPage}" Route="SongsPage" />
+    <ShellContent Title="Cantantes" Icon="{StaticResource IconDashboard}" ContentTemplate="{DataTemplate singers:SingersPage}" Route="SingersPage" />
+    <ShellContent Title="Usuarios" Icon="{StaticResource IconMeta}" ContentTemplate="{DataTemplate users:UserPage}" Route="UserPage" />
 
     <Shell.FlyoutFooter>
         <Grid Padding="14" BackgroundColor="{AppThemeBinding Light=#EEF2FF, Dark=#171F3A}">

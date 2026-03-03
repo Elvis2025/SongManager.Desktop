@@ -5,26 +5,17 @@
                        xmlns:pages="clr-namespace:SongManager.Desktop.Pages"
                        xmlns:pageModel="clr-namespace:SongManager.Desktop.PageModels"
                        x:TypeArguments="pageModel:SingersPageModel"
+                       Shell.TabBarIsVisible="False"
                        Background="{StaticResource PageBackgroundGradient}">
 
-    <Grid Padding="24" RowDefinitions="Auto,Auto,*" RowSpacing="14" x:Name="PageRoot">
-        <Label Text="♫"
-               Style="{StaticResource WatermarkLabel}"
-               HorizontalOptions="End"
-               VerticalOptions="Start"
-               Margin="0,-40,-24,0" />
+    <Grid Padding="24,18,24,0" RowDefinitions="Auto,Auto,*,Auto" RowSpacing="14" x:Name="PageRoot">
+        <Label Text="♫" Style="{StaticResource WatermarkLabel}" HorizontalOptions="End" VerticalOptions="Start" Margin="0,-40,-24,0" />
 
         <Border x:Name="HeroCard" Style="{StaticResource GlassCard}">
             <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto" RowSpacing="6">
                 <Label Text="Directorio de Cantantes" Style="{StaticResource HeroTitle}" />
-                <Label Grid.Row="1"
-                       Text="Visualiza datos vocales y administra perfiles con claridad."
-                       Style="{StaticResource HeroSubtitle}" />
-                <Button Grid.Column="1"
-                        Grid.RowSpan="2"
-                        Text="+ Nuevo"
-                        Style="{StaticResource PrimaryActionButton}"
-                        Command="{Binding CreateSingerCommand}" />
+                <Label Grid.Row="1" Text="Visualiza datos vocales y administra perfiles con claridad." Style="{StaticResource HeroSubtitle}" />
+                <Button Grid.Column="1" Grid.RowSpan="2" Text="+ Nuevo" IsVisible="{Binding CanManageSingers}" Style="{StaticResource PrimaryActionButton}" Command="{Binding CreateSingerCommand}" />
             </Grid>
         </Border>
 
@@ -32,37 +23,26 @@
             <HorizontalStackLayout Spacing="12">
                 <Border Style="{StaticResource SoftChip}"><Label Text="Total" FontAttributes="Bold" /></Border>
                 <Label Text="{Binding SingersDto.Count}" Style="{StaticResource StatNumber}" />
-                <Label Text="cantantes registrados"
-                       VerticalOptions="Center"
-                       TextColor="{AppThemeBinding Light=#5E678D, Dark=#BCC5E7}" />
+                <Label Text="cantantes registrados" VerticalOptions="Center" TextColor="{AppThemeBinding Light=#5E678D, Dark=#BCC5E7}" />
             </HorizontalStackLayout>
         </Border>
 
-        <CollectionView Grid.Row="2" x:Name="SingersCollection" ItemsSource="{Binding SingersDto}" SelectionMode="None">
+        <CollectionView Grid.Row="2" x:Name="SingersCollection" ItemsSource="{Binding SingersDto}" SelectionMode="None" Margin="0,4,0,8">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Border Style="{StaticResource GlassCard}" Margin="0,0,0,12">
-                        <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto,Auto" RowSpacing="8">
+                    <Border Style="{StaticResource GlassCard}" Margin="0,0,0,16">
+                        <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto,Auto" RowSpacing="10">
                             <Label Text="{Binding FullNameComplete}" FontSize="18" FontAttributes="Bold" />
-                            <Border Grid.Column="1" Style="{StaticResource SoftChip}">
-                                <Label Text="{Binding Code}" FontAttributes="Bold" FontSize="12" />
-                            </Border>
+                            <Border Grid.Column="1" Style="{StaticResource SoftChip}"><Label Text="{Binding Code}" FontAttributes="Bold" FontSize="12" /></Border>
 
                             <HorizontalStackLayout Grid.Row="1" Grid.ColumnSpan="2" Spacing="8">
                                 <Border Style="{StaticResource SoftChip}"><Label Text="{Binding Gender}" FontSize="12"/></Border>
                                 <Border Style="{StaticResource SoftChip}"><Label Text="{Binding VocalRange}" FontSize="12"/></Border>
                             </HorizontalStackLayout>
 
-                            <HorizontalStackLayout Grid.Row="2" Grid.ColumnSpan="2" Spacing="8">
-                                <Button Text="Editar"
-                                        Style="{StaticResource SecondaryActionButton}"
-                                        Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.EditSingerCommand}"
-                                        CommandParameter="{Binding .}" />
-                                <Button Text="Eliminar"
-                                        BackgroundColor="{AppThemeBinding Light=#FEE3E3, Dark=#54283A}"
-                                        TextColor="{AppThemeBinding Light=#B42318, Dark=#FFC0CF}"
-                                        Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.DeleteSingerCommand}"
-                                        CommandParameter="{Binding .}" />
+                            <HorizontalStackLayout Grid.Row="2" Grid.ColumnSpan="2" Spacing="8" IsVisible="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.CanManageSingers}">
+                                <Button Text="Editar" Style="{StaticResource SecondaryActionButton}" Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.EditSingerCommand}" CommandParameter="{Binding .}" />
+                                <Button Text="Eliminar" BackgroundColor="{AppThemeBinding Light=#FEE3E3, Dark=#54283A}" TextColor="{AppThemeBinding Light=#B42318, Dark=#FFC0CF}" Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.DeleteSingerCommand}" CommandParameter="{Binding .}" />
                             </HorizontalStackLayout>
                         </Grid>
                     </Border>
@@ -78,5 +58,13 @@
                 </Border>
             </CollectionView.EmptyView>
         </CollectionView>
+
+        <Border Grid.Row="3" x:Name="BottomNav" Style="{StaticResource FloatingBottomBar}">
+            <Grid ColumnDefinitions="*,*,*" ColumnSpacing="8">
+                <Button Text="Canciones" Style="{StaticResource SecondaryActionButton}" Clicked="GoSongs_Clicked" />
+                <Button Grid.Column="1" Text="Cantantes" Style="{StaticResource PrimaryActionButton}" Clicked="GoSingers_Clicked" />
+                <Button Grid.Column="2" Text="Usuarios" Style="{StaticResource SecondaryActionButton}" Clicked="GoUsers_Clicked" />
+            </Grid>
+        </Border>
     </Grid>
 </pages:BaseContentPage>

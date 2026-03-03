@@ -136,4 +136,26 @@
         <Setter Property="TextColor" Value="{AppThemeBinding Light=#172048, Dark=#EEF2FF}" />
     </Style>
 
+    <Style x:Key="FieldShell" TargetType="Border">
+        <Setter Property="Background" Value="{AppThemeBinding Light=#F8FAFF, Dark=#1E2745}" />
+        <Setter Property="Stroke" Value="{AppThemeBinding Light=#D8E0FF, Dark=#36456F}" />
+        <Setter Property="StrokeThickness" Value="1" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 14" />
+        <Setter Property="Padding" Value="10,6" />
+    </Style>
+
+    <Style x:Key="FloatingBottomBar" TargetType="Border">
+        <Setter Property="Background" Value="{AppThemeBinding Light=#FFFFFF, Dark=#1A2443}" />
+        <Setter Property="Stroke" Value="{AppThemeBinding Light=#D7E0FF, Dark=#36456F}" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 26" />
+        <Setter Property="StrokeThickness" Value="1" />
+        <Setter Property="Padding" Value="10,8" />
+        <Setter Property="Margin" Value="18,0,18,16" />
+        <Setter Property="Shadow">
+            <Setter.Value>
+                <Shadow Brush="{AppThemeBinding Light=#1A2A6840, Dark=#00000070}" Offset="0,10" Radius="20" Opacity="0.4" />
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 </ResourceDictionary>
