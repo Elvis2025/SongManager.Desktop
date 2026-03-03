@@ -11,6 +11,7 @@ public class Users : BaseEntity<int>
     public string FirstSurname { get; set; } = string.Empty;
     public string SecondSurname { get; set; } = string.Empty;
     public string Password { get; set; } = string.Empty;
+    public bool IsAdmin { get; set; }
     [Ignore]
     public UsersDto UserDto => this.Map<UsersDto>();
 }
