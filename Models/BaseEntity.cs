@@ -1,8 +1,4 @@
-﻿
-using System.Runtime.InteropServices;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-
-namespace SongManager.Desktop.Models;
+﻿namespace SongManager.Desktop.Models;
 
 public abstract class BaseEntity<TPrimaryKey> : IBaseEntity
 {
@@ -15,5 +11,5 @@ public abstract class BaseEntity<TPrimaryKey> : IBaseEntity
     public bool IsDeleted { get; set; }
     public int? CreatorUserId { get ; set; }
     [Unique, NotNull]
-    public Guid? Guid { get; set; }
+    public Guid? Guid { get; set; } = System.Guid.NewGuid();
 }
