@@ -286,4 +286,52 @@
         <Setter Property="ProgressColor" Value="{StaticResource Primary}"/>
     </Style>
 
+    <LinearGradientBrush x:Key="PageBackgroundGradient" EndPoint="0,1">
+        <GradientStop Color="{AppThemeBinding Light=#F4F7FF, Dark=#0E1222}" Offset="0.0" />
+        <GradientStop Color="{AppThemeBinding Light=#EEF1FF, Dark=#151A2E}" Offset="1.0" />
+    </LinearGradientBrush>
+
+    <Style x:Key="ModernCard" TargetType="Border">
+        <Setter Property="Background" Value="{AppThemeBinding Light=#FFFFFF, Dark=#1C2238}" />
+        <Setter Property="Stroke" Value="{AppThemeBinding Light=#E3E8FF, Dark=#2A3352}" />
+        <Setter Property="StrokeThickness" Value="1" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 24" />
+        <Setter Property="Padding" Value="18" />
+    </Style>
+
+    <Style x:Key="HeroTitle" TargetType="Label">
+        <Setter Property="FontSize" Value="30" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light=#161B31, Dark=#F4F6FF}" />
+    </Style>
+
+    <Style x:Key="HeroSubtitle" TargetType="Label">
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light=#5A627D, Dark=#B7BFDA}" />
+        <Setter Property="Opacity" Value="0.9" />
+    </Style>
+
+    <Style x:Key="WatermarkLabel" TargetType="Label">
+        <Setter Property="FontSize" Value="80" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="Rotation" Value="-8" />
+        <Setter Property="Opacity" Value="0.06" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light=#3042A8, Dark=#A9B4FF}" />
+    </Style>
+
+    <Style x:Key="PrimaryActionButton" TargetType="Button">
+        <Setter Property="CornerRadius" Value="16" />
+        <Setter Property="Padding" Value="16,12" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=#635BFF, Dark=#8D86FF}" />
+        <Setter Property="TextColor" Value="White" />
+    </Style>
+
+    <Style x:Key="SoftChip" TargetType="Border">
+        <Setter Property="Background" Value="{AppThemeBinding Light=#EEF1FF, Dark=#252E4A}" />
+        <Setter Property="StrokeThickness" Value="0" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 16" />
+        <Setter Property="Padding" Value="10,6" />
+    </Style>
+
 </ResourceDictionary>
